@@ -54,6 +54,24 @@ p.lead {
   font-size: 1.5rem;
 }
 
+.img-project {
+  opacity: 1;
+}
+
+.img-project:hover {
+  opacity: 0.5;
+}
+
+.project-item {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.project-gif, .project-content {
+  width: 50%;
+}
+
 .social-icons a {
   display: inline-block;
   height: 3.5rem;

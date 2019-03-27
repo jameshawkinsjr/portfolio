@@ -49,6 +49,21 @@ p.lead {
   font-size: 1.5rem;
 }
 
+.img-project {
+  opacity: 1;
+  &:hover{
+    opacity: 0.5;
+  }
+}
+
+.project-item {
+  align-items: center;
+}
+
+.project-gif, .project-content {
+  width: 50%;
+}
+
 .social-icons {
   a {
     display: inline-block;
