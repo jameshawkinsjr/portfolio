@@ -3,7 +3,15 @@ section.resume-section {
   padding-bottom: 5rem !important;
   max-width: 75rem;
   .resume-item {
-    .resume-content {}
+    .resume-content {
+      ul {
+        .fa-check{
+          &:hover{
+            color: $green;
+          }
+        }
+      }
+    }
     .resume-date {
       min-width: none;
     }

@@ -155,6 +155,10 @@ section.resume-section {
   max-width: 75rem;
 }
 
+section.resume-section .resume-item .resume-content ul .fa-check:hover {
+  color: #28a745;
+}
+
 section.resume-section .resume-item .resume-date {
   min-width: none;
 }
