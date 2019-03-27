@@ -5,15 +5,17 @@ section.resume-section {
   .resume-item {
     .resume-content {
       ul {
-        .fa-check{
-          &:hover{
-            color: $green;
-          }
-        }
       }
     }
-    .resume-date {
-      min-width: none;
+  }
+  .resume-date {
+    min-width: none;
+  }
+}
+.fa-ul{
+  .fa-li {
+    &:hover{
+      color: $green;
     }
   }
 }
