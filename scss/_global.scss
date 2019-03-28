@@ -100,6 +100,13 @@ p.lead {
   }
 }
 
+.uber {
+  background: $red-opacity;
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: white;
+}
+
 .social-icons {
   a {
     display: inline-block;

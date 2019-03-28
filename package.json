@@ -3,7 +3,8 @@
   "name": "james_hawkins_portfolio",
   "version": "5.0.5",
   "scripts": {
-    "start": "gulp watch"
+    "start": "gulp watch",
+    "build": "gulp build"
   },
   "description": "Portfolio site for James Hawkins",
   "keywords": [

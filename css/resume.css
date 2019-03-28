@@ -115,6 +115,13 @@ p.lead {
   -webkit-filter: grayscale(0);
 }
 
+.uber {
+  background: #dc3546ad;
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: white;
+}
+
 .social-icons a {
   display: inline-block;
   height: 3.5rem;
@@ -221,7 +228,7 @@ section.resume-section .resume-date {
 }
 
 .fa-ul .fa-li:hover {
-  color: #28a745;
+  color: #dc3545;
 }
 
 @media (min-width: 768px) {
