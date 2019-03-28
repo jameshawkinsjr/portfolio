@@ -82,6 +82,10 @@ p.lead {
   opacity: 0.3;
 }
 
+.bucket-list-complete {
+  text-decoration: line-through;
+}
+
 .project-gif:hover .project-link-container {
   padding: 10px;
   background: $red;

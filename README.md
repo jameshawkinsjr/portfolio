@@ -3,10 +3,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8354caa0-780e-40fb-9d8c-349d332bfbfe/deploy-status)](https://app.netlify.com/sites/adoring-wozniak-1ca70b/deploys)
 </div>
 <p align="center">
-  <a href="http://hype-chat.com/">
-    <img src="https://github.com/jameshawkinsjr/portfolio/blob/master/img/icons/jh.png" alt="james hawkins" width="30">
-  </a>
+    <img src="https://github.com/jameshawkinsjr/portfolio/blob/master/img/icons/jh.png" alt="james hawkins" width="40">
 </p>
+
 ## James Hawkins Resume
 
 ### [View Live](http://www.jameshawkins.com)
@@ -21,9 +20,6 @@
 
 
 ## Template
-
-[Resume](https://startbootstrap.com/template-overviews/resume/) is a resume and CV theme for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This theme features a fixed sidebar with content sections to build a simple, yet elegant resume.
-
 
 Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
 
