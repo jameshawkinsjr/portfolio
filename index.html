@@ -20,17 +20,20 @@
 
   <!-- Custom styles for this template -->
   <link href="css/resume.min.css" rel="stylesheet">
-  
+
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137238311-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137238311-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'UA-137238311-1');
-    </script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137238311-1');
+  </script>
 </head>
 
 <body id="page-top">
@@ -42,7 +45,8 @@
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
       </span>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -82,7 +86,11 @@
         <div class="subheading mb-5">(760) 333-0473 ·
           <a href="mailto:james@jameshawkins.com">james@jameshawkins.com</a>
         </div>
-        <p class="lead mb-5">Previously <span class="uber">@Uber</span> on the Fraud & Risk product team. Recently turned Full-stack engineer using technologies like React, Javascript, Ruby, and Rails. 6 years of experience in tech on fast-moving, rapidly-growing teams. Various side-projects include a fully-functional messaging app, a typing speed testing game, a finance-focused data visualization tool, and an original concept in-browser game.</p>
+        <p class="lead mb-5">Software Engineer at <span class="ethos">@Ethos</span>. Previously <span
+            class="uber">@Uber</span> on the Fraud & Risk product team. Full-stack engineer with experience using
+          React, Javascript, Node, Python, Django. 6 years of experience in tech on fast-moving,
+          rapidly-growing teams. Various side-projects include a fully-functional messaging app, a typing speed testing
+          game, a finance-focused data visualization tool, and an original concept in-browser game.</p>
         <div class="social-icons">
           <a href="https://linkedin.com/in/jshawkins/" target="_blank">
             <i class="fab fa-linkedin-in"></i>
@@ -96,9 +104,6 @@
           <a href="https://www.instagram.com/jameshawkins" target="_blank">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://www.facebook.com/jameshawkins" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-          </a>
           <a href="https://twitter.com/jimmyhawkins" target="_blank">
             <i class="fab fa-twitter"></i>
           </a>
@@ -109,105 +114,112 @@
     <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="projects">
-        <div class="w-100">
-          <h2 class="mb-5">Projects</h2>
-            <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
-                <div class="project-content mr-1">
-                  <h3 class="mb-0">Hype Chat</h3>
-                  <div class="subheading mb-0">A Messaging App | <a target="_blank" href="http://hype-chat.com/">LIVE</a> | <a target="_blank" href="https://github.com/jameshawkinsjr/hype/">GITHUB</a></div>
-                  <p class="mb-3">React/Redux, Ruby on Rails, PostgreSQL, Action Cable</p>
-                  <ul class="fa-ul mb-0">
-                    <li>
-                      <i class="fa-li fas fa-check"></i>
-                      Pixel-perfect rendition of Slack
-                    </li>
-                    <li>
-                      <i class="fa-li fas fa-check"></i>
-                      User-to-user chat using websockets
-                    </li>
-                    <li>
-                      <i class="fa-li fas fa-check"></i>
-                      Real-time unread notifications
-                    </li>
-                    <li>
-                      <i class="fa-li fas fa-check"></i>
-                      Chatrooms, group threads, direct message conversations
-                    </li>
-                    <li>
-                </ul>
-                      
-                </div>
-                <div class="project-gif">
-                  <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/hype.gif" alt="Hype">
-                  <div class="project-link-container">
-                      <div class="project-link"><a target="_blank" href="http://hype-chat.com/">View Live</a></div>
-                    </div>
-                  </div>
-                </div>
-                  <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
-                    <div class="project-content mr-1">
-                      <h3 class="mb-0">Rocket Typer</h3>
-                      <div class="subheading mb-0">A Typing-Speed Tracker | <a target="_blank" href="https://rockettyper.com">LIVE</a> | <a target="_blank" href="https://github.com/jameshawkinsjr/rocket-typer">GITHUB</a></div>
-                      <p class="mb-3">MongoDB, ExpressJS, React/Redux, NodeJS, Socket.IO</p>
-                      <ul class="fa-ul mb-0">
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          Multiplayer functionality -- race alone or with friends
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          Global leaderboard and recent races
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          User account creation and authentication
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          User profiles with personal stats
-                        </li>
-                      </ul>
-                      
-                    </div>
-                    <div class="project-gif">
-                      <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/rocket_typer.gif" alt="Rocket Typer">
-                      <div class="project-link-container">
-                          <div class="project-link"><a target="_blank" href="https://rockettyper.com">View Live</a></div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
-                    <div class="project-content mr-1">
-                      <h3 class="mb-0">Sliver</h3>
-                      <div class="subheading mb-0">An original concept game | <a target="_blank" href="https://jameshawkinsjr.github.io/sliver/dist/">LIVE</a> | <a target="_blank" href="https://github.com/jameshawkinsjr/sliver">GITHUB</a></div>
-                      <p class="mb-3">Javascript, HTML5, Canvas</p>
-                      <ul class="fa-ul mb-0">
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          Use your cursor to look around
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          Usable items, including flashlights, lanterns and batteries
-                        </li>
-                        <li>
-                          <i class="fa-li fas fa-check"></i>
-                          Sound effects, multiple levels, and enemies -- oh my!
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="project-gif">
-                      <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/sliver.gif" alt="Sliver">
-                      <div class="project-link-container">
-                          <div class="project-link"><a target="_blank" href="https://jameshawkinsjr.github.io/sliver/dist/">View Live</a></div>
-                        </div>
-                      </div>
-                    </div>
-                  <!-- <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
+      <div class="w-100">
+        <h2 class="mb-5">Projects</h2>
+        <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
+          <div class="project-content mr-1">
+            <h3 class="mb-0">Hype Chat</h3>
+            <div class="subheading mb-0">A Messaging App | <a target="_blank"
+                href="https://get-hype-chat.herokuapp.com/">LIVE</a> | <a target="_blank"
+                href="https://github.com/jameshawkinsjr/hype/">GITHUB</a></div>
+            <p class="mb-3">React/Redux, Ruby on Rails, PostgreSQL, Action Cable</p>
+            <ul class="fa-ul mb-0">
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Pixel-perfect rendition of Slack
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                User-to-user chat using websockets
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Real-time unread notifications
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Chatrooms, group threads, direct message conversations
+              </li>
+              <li>
+            </ul>
+
+          </div>
+          <div class="project-gif">
+            <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/hype.gif" alt="Hype">
+            <div class="project-link-container">
+              <div class="project-link"><a target="_blank" href="http://hype-chat.com/">View Live</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
+          <div class="project-content mr-1">
+            <h3 class="mb-0">Rocket Typer</h3>
+            <div class="subheading mb-0">A Typing-Speed Tracker | <a target="_blank"
+                href="https://rocket-typer.herokuapp.com/">LIVE</a> | <a target="_blank"
+                href="https://github.com/jameshawkinsjr/rocket-typer">GITHUB</a></div>
+            <p class="mb-3">MongoDB, ExpressJS, React/Redux, NodeJS, Socket.IO</p>
+            <ul class="fa-ul mb-0">
+              <li>
+                <i class="fa-li fas fa-check"></i>
+
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Multiplayer functionality -- race alone or with friends
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Global leaderboard and recent races
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                User account creation and authentication
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                User profiles with personal stats
+              </li>
+            </ul>
+
+          </div>
+          <div class="project-gif">
+            <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/rocket_typer.gif" alt="Rocket Typer">
+            <div class="project-link-container">
+              <div class="project-link"><a target="_blank" href="https://rockettyper.com">View Live</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
+          <div class="project-content mr-1">
+            <h3 class="mb-0">Sliver</h3>
+            <div class="subheading mb-0">An original concept game | <a target="_blank"
+                href="https://jameshawkinsjr.github.io/sliver/dist/">LIVE</a> | <a target="_blank"
+                href="https://github.com/jameshawkinsjr/sliver">GITHUB</a></div>
+            <p class="mb-3">Javascript, HTML5, Canvas</p>
+            <ul class="fa-ul mb-0">
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Use your cursor to look around
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Usable items, including flashlights, lanterns and batteries
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Sound effects, multiple levels, and enemies -- oh my!
+              </li>
+            </ul>
+          </div>
+          <div class="project-gif">
+            <img class="img-fluid img-project mx-auto mb-2 mt-3" src="img/sliver.gif" alt="Sliver">
+            <div class="project-link-container">
+              <div class="project-link"><a target="_blank" href="https://jameshawkinsjr.github.io/sliver/dist/">View
+                  Live</a></div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="project-item d-flex flex-column flex-md-row justify-content-between mb-4">
                     <div class="project-content mr-1">
                       <h3 class="mb-0">Flex-Invest</h3>
                       <div class="subheading mb-0">A Portfolio Forecasting Tool | <a target="_blank" href="https://flex-invest.herokuapp.com">LIVE</a> | <a target="_blank" href="https://github.com/jameshawkinsjr/flex-invest">GITHUB</a></div>
@@ -239,21 +251,49 @@
                         </div>
                     </div>
                   </div> -->
-        </div>
-      </section>
-  
-      <hr class="m-0">
+      </div>
+    </section>
+
+    <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
       <div class="w-100">
         <h2 class="mb-5">Experience</h2>
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
+            <h3 class="mb-0">Fullstack Developer</h3>
+            <div class="subheading mb-3">Ethos Life</div>
+            <ul class="fa-ul mb-0">
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Build features using a React/Redux frontend & Koa/Node.js backend.
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Design, build, and maintain public and private APIs
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Collaborate with engineering, design, and product to develop and ship features
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Write efficient, modular, and reusable libraries and abstractions
+              </li>
+            </ul>
+
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">August 2019 – Present</span>
+          </div>
+        </div>
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
             <h3 class="mb-0">Senior Manager, Product Operations: Risk & Fraud</h3>
             <div class="subheading mb-3">Uber</div>
             <ul class="fa-ul mb-0">
               <li>
-                  <i class="fa-li fas fa-check"></i>
+                <i class="fa-li fas fa-check"></i>
                 Drove quarterly product planning cycles for six Product teams within the Risk organization.
               </li>
               <li>
@@ -268,8 +308,8 @@
                 <i class="fa-li fas fa-check"></i>
                 Wrote fraud rules in Python and SQL queries to debug, scope, and block attack vectors.
               </li>
-          </ul>
-                
+            </ul>
+
           </div>
           <div class="resume-date text-md-right">
             <span class="text-primary">February 2015 – September 2018</span>
@@ -281,26 +321,25 @@
             <h3 class="mb-0">Senior Manager, Community Operations</h3>
             <div class="subheading mb-3">Uber</div>
             <ul class="fa-ul">
-                <li>
-                    <i class="fa-li fas fa-check"></i>
-                    Piloted and trained the first team of dedicated support representatives at Uber, laying the foundation for a 20,000+ person support organization.
-                </li>
-                <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Defined hundreds of support policies for riders and driver-partners around the world.
-                </li>
-                <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Managed a team of seven employees responsible for writing support policies and managing individual sub-teams 
-                </li>
-                <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Maintained a support SLA  of < 12 hours for all support tickets in the West Coast region.
-                </li>
-            </ul>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">December 2012 - February 2015</span>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Piloted and trained the first team of dedicated support representatives at Uber, laying the foundation
+                for a 20,000+ person support organization.
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Defined hundreds of support policies for riders and driver-partners around the world.
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Managed a team of seven employees responsible for writing support policies and managing individual
+                sub-teams
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Maintained a support SLA of < 12 hours for all support tickets in the West Coast region. </li> </ul>
+                  </div> <div class="resume-date text-md-right">
+                  <span class="text-primary">December 2012 - February 2015</span>
           </div>
         </div>
 
@@ -309,14 +348,14 @@
             <h3 class="mb-0">Second Assistant to Ashton Kutcher</h3>
             <div class="subheading mb-3">Katalyst Films</div>
             <ul class="fa-ul">
-                <li>
-                    <i class="fa-li fas fa-check"></i>
-                    Researched startups for possible investments and assemble dossiers based on findings.
-                </li>
-                <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Documented ideas and produced presentation decks for potential investors and business partners.
-                </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Researched startups for possible investments and assemble dossiers based on findings.
+              </li>
+              <li>
+                <i class="fa-li fas fa-check"></i>
+                Documented ideas and produced presentation decks for potential investors and business partners.
+              </li>
             </ul>
           </div>
           <div class="resume-date text-md-right">
@@ -333,7 +372,7 @@
       <div class="w-100">
         <h2 class="mb-5">Education</h2>
 
-        
+
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
           <div class="resume-content">
             <h3 class="education-title mb-0 flex">App Academy</h3>
@@ -346,7 +385,7 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-              <h3 class="education-title mb-0 flex">University of Southern California</h3>
+            <h3 class="education-title mb-0 flex">University of Southern California</h3>
             <div class="subheading mb-3">B.A. Economics</div>
           </div>
           <div class="resume-date text-md-right">
@@ -366,40 +405,62 @@
         <div class="subheading mb-3">Programming Languages &amp; Tools</div>
         <ul class="list-inline dev-icons">
           <li class="list-inline-item">
-            <i class="fab fa-js-square"><p>JavaScript</p></i>
+            <i class="fab fa-js-square">
+              <p>JavaScript</p>
+            </i>
+          </li>
+          <!-- <li class="list-inline-item">
+            <i class="far fa-gem">
+              <p>Ruby</p>
+            </i>
+          </li> -->
+          <li class="list-inline-item">
+            <i class="fab fa-react">
+              <p>React</p>
+            </i>
           </li>
           <li class="list-inline-item">
-            <i class="far fa-gem"><p>Ruby</p></i>
+            <i class="fab fa-html5">
+              <p>HTML5</p>
+            </i>
           </li>
           <li class="list-inline-item">
-            <i class="fab fa-react"><p>React</p></i>
+            <i class="fab fa-css3-alt">
+              <p>CSS3</p>
+            </i>
+          </li>
+          <!-- <li class="list-inline-item">
+            <i class="fab fa-angular">
+              <p>AngularJS</p>
+            </i>
+          </li> -->
+          <li class="list-inline-item">
+            <i class="fab fa-node-js">
+              <p>NodeJS</p>
+            </i>
           </li>
           <li class="list-inline-item">
-            <i class="fab fa-html5"><p>HTML5</p></i>
+            <i class="fab fa-sass">
+              <p>SASS</p>
+            </i>
           </li>
-          <li class="list-inline-item">
-            <i class="fab fa-css3-alt"><p>CSS3</p></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-angular"><p>AngularJS</p></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-node-js"><p>NodeJS</p></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-sass"><p>SASS</p></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab"><img src="./img/icons/canvas.png" ><p>Canvas</p></i>
-          </li>
+          <!-- <li class="list-inline-item">
+            <i class="fab"><img src="./img/icons/canvas.png">
+              <p>Canvas</p>
+            </i>
+          </li> -->
           <li class="list-inline-item hover-purple">
-            <i class="fab "><img src="./img/icons/redux.png" ><p class="">Redux</p></i>
+            <i class="fab "><img src="./img/icons/redux.png">
+              <p class="">Redux</p>
+            </i>
           </li>
           <!-- <li class="list-inline-item">
             <i class="fab fa-npm"><p>NPM</p></i>
           </li> -->
           <li class="list-inline-item">
-            <i class="fab fa-aws"><p>AWS</p></i>
+            <i class="fab fa-aws">
+              <p>AWS</p>
+            </i>
           </li>
         </ul>
     </section>
@@ -409,7 +470,9 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
       <div class="w-100">
         <h2 class="mb-5">Interests</h2>
-        <p>In my personal life, I'm a bit of a gym rat and love to ski. I've completed a handful of marathons and it's not uncommon to find me at the gym or out running. When I'm indoors, I spend a lot of time on Hacker News & Reddit and, when I find the time, love to play video games (anything from PC to consoles to VR).</p>
+        <p>In my personal life, I'm a bit of a gym rat and love to ski. I've completed a handful of marathons and it's
+          not uncommon to find me at the gym or out running. When I'm indoors, I spend a lot of time on Hacker News &
+          Reddit and, when I find the time, love to play video games (anything from PC to consoles to VR).</p>
         <p>My current bucket list includes:</p>
         <ul class="fa-ul">
           <li>
@@ -421,23 +484,24 @@
             Skiing on all seven continents
           </li>
           <li>
-              <i class="fa-li fas fa-swimmer"></i>
-              Completing an IRONMAN triathlon
+            <i class="fa-li fas fa-swimmer"></i>
+            Completing an IRONMAN triathlon
           </li>
           <li>
-              <i class="fa-li fas fa-swimming-pool"></i>
-              Become SCUBA certified
+            <i class="fa-li fas fa-swimming-pool"></i>
+            Become SCUBA certified
           </li>
           <li>
-              <i class="fa-li fas fa-parachute-box"></i>
-              Complete a solo parachute jump
+            <i class="fa-li fas fa-parachute-box"></i>
+            Complete a solo parachute jump
           </li>
           <li>
-              <i class="fa-li fas fa-paw"></i>
-              (Completed) <span class=bucket-list-complete>Join a safari in Tanzania </span>
+            <i class="fa-li fas fa-paw"></i>
+            (Completed) <span class=bucket-list-complete>Join a safari in Tanzania </span>
           </li>
-          </ul>
-        <p>I've recently caught the travel bug and am looking for new places to check out (open to suggestions -- easily accessible skiing is major plus).</p>
+        </ul>
+        <p>I've recently caught the travel bug and am looking for new places to check out (open to suggestions -- easily
+          accessible skiing is major plus).</p>
         <p>A few of the places on my list:</p>
         <ul class="fa-ul">
           <li>
@@ -453,14 +517,14 @@
             Great Barrier Reef
           </li>
           <li>
-              <i class="fa-li fas fa-map-pin"></i>
-              Croatia
+            <i class="fa-li fas fa-map-pin"></i>
+            Croatia
           </li>
           <li>
-              <i class="fa-li fas fa-map-pin"></i>
-              (Completed) <span class=bucket-list-complete>Tanzania</span>
+            <i class="fa-li fas fa-map-pin"></i>
+            (Completed) <span class=bucket-list-complete>Tanzania</span>
           </li>
-          </ul>
+        </ul>
       </div>
     </section>
 
@@ -469,21 +533,22 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="photography">
       <div class="w-100">
-      <h2 class="mb-3">Photography</h2>
-      <div class="d-flex mb-3">
-        <div class="mr-2">Personal: <a href="https://www.instagram.com/jameshawkins" target="_blank">
-          @jameshawkins
-        </a>
-      </div>
-      |
-      <div class="ml-2">
-        Photography: <a href="https://www.instagram.com/jhawk.photography" target="_blank">
-          @jhawk.photography
-        </a>
-      </div>
-    </div>
-      
-        <div id="curator-feed"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
+        <h2 class="mb-3">Photography</h2>
+        <div class="d-flex mb-3">
+          <div class="mr-2">Personal: <a href="https://www.instagram.com/jameshawkins" target="_blank">
+              @jameshawkins
+            </a>
+          </div>
+          |
+          <div class="ml-2">
+            Photography: <a href="https://www.instagram.com/jhawk.photography" target="_blank">
+              @jhawk.photography
+            </a>
+          </div>
+        </div>
+
+        <div id="curator-feed"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by
+            Curator.io</a></div>
     </section>
 
     <hr class="m-0">
@@ -502,12 +567,16 @@
 
   <script type="text/javascript">
     /* curator-feed */
-    (function(){
-    var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
-    i.src = "https://cdn.curator.io/published/2f2d56af-8e2b-4581-92b7-5afb8e15be96.js";
-    e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+    (function () {
+      var i, e, d = document,
+        s = "script";
+      i = d.createElement("script");
+      i.async = 1;
+      i.src = "https://cdn.curator.io/published/2f2d56af-8e2b-4581-92b7-5afb8e15be96.js";
+      e = d.getElementsByTagName(s)[0];
+      e.parentNode.insertBefore(i, e);
     })();
-    </script>
+  </script>
 
 </body>
 
