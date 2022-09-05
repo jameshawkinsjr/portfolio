@@ -31,7 +31,7 @@
     "bootstrap": "4.3.1",
     "jquery": "^3.5.0",
     "jquery.easing": "^1.4.1",
-    "startbootstrap-resume": "^5.0.5"
+    "startbootstrap-resume": "^7.0.5"
   },
   "devDependencies": {
     "browser-sync": "^2.26.5",
