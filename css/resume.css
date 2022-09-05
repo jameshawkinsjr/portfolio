@@ -159,6 +159,13 @@ p.lead {
   color: #fff;
 }
 
+.luna {
+  background: rgba(153, 115, 199, 0.6666666667);
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: #fff;
+}
+
 .social-icons a {
   display: inline-block;
   height: 3.5rem;
