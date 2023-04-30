@@ -34,7 +34,7 @@
     "startbootstrap-resume": "^7.0.5"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.29.1",
     "del": "4.0.0",
     "gulp": "4.0.0",
     "gulp-autoprefixer": "6.0.0",
