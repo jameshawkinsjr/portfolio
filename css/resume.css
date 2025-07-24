@@ -1,6 +1,6 @@
 /*!
  * Start Bootstrap - Resume v5.0.5 (http://jameshawkins.com)
- * Copyright 2013-2022 James Hawkins
+ * Copyright 2013-2025 James Hawkins
  * Licensed under MIT (https://github.com/BlackrockDigital/james_hawkins_portfolio/blob/master/LICENSE)
  */
 
@@ -159,8 +159,8 @@ p.lead {
   color: #fff;
 }
 
-.luna {
-  background: rgba(153, 115, 199, 0.6666666667);
+.simple-dvm {
+  background: #333232;
   border-radius: 4px;
   padding: 1px 4px;
   color: #fff;
@@ -198,7 +198,7 @@ p.lead {
   text-transform: uppercase;
 }
 #sideNav .navbar-toggler:focus {
-  outline-color: #e77681;
+  outline-color: rgb(231.2974683544, 118.2025316456, 129.0379746835);
 }
 
 @media (min-width: 992px) {
@@ -295,5 +295,5 @@ a {
   color: #dc3545;
 }
 a:hover, a:focus, a:active {
-  color: #a71d2a;
+  color: rgb(167.4810126582, 29.0189873418, 42.2848101266);
 }
