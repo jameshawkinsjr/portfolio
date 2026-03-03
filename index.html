@@ -456,9 +456,11 @@
     }
 
     .exp-bullets li::before {
-      content: '—';
+      content: '•';
       position: absolute;
       left: 0;
+      top: 50%;
+      transform: translateY(-50%);
       color: var(--text-dim);
       font-size: 0.75rem;
     }
@@ -864,7 +866,6 @@
           <div class="exp-role-entry">
             <div class="exp-role-header">
               <div class="exp-role">Senior Manager, Risk & Fraud</div>
-              <div class="exp-date">February 2015 — September 2018</div>
             </div>
             <ul class="exp-bullets">
               <li>Key role in scaling Uber's Risk team from 5 to 100+ employees while reducing loss rates by over 80%.</li>
@@ -876,7 +877,6 @@
           <div class="exp-role-entry">
             <div class="exp-role-header">
               <div class="exp-role">Senior Manager, Community Operations</div>
-              <div class="exp-date">December 2012 — February 2015</div>
             </div>
             <ul class="exp-bullets">
               <li>Piloted and trained the first team of dedicated support reps at Uber — the foundation of a 20,000+ person support org.</li>
@@ -918,7 +918,7 @@
       <div class="edu-item">
         <div class="edu-school">App Academy</div>
         <div class="edu-degree">Full-Stack Web Development</div>
-        <div class="edu-date">January — Apr 2019</div>
+        <div class="edu-date">January — April 2019</div>
       </div>
       <div class="edu-item">
         <div class="edu-school">University of Southern California</div>
