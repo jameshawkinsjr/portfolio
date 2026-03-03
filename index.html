@@ -1,445 +1,1010 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="James Hawkins Resume Portfolio">
   <meta name="author" content="James Hawkins">
-
   <title>James Hawkins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137238311-1"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+ 
+     function gtag() {
+       dataLayer.push(arguments);
+     }
+     gtag('js', new Date());
+ 
+     gtag('config', 'UA-137238311-1');
+   </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/resume.min.css" rel="stylesheet">
-
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137238311-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
+    :root {
+      --bg: #080808;
+      --bg-2: #111111;
+      --bg-3: #181818;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.15);
+      --text: #ededed;
+      --text-muted: #888;
+      --text-dim: #848383;
+      --text-red: #7a242c;
+      --accent: #fff;
+      --accent-green: #4ade80;
+      --accent-blue: #60a5fa;
+      --font-display: 'Inter', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-    gtag('js', new Date());
 
-    gtag('config', 'UA-137238311-1');
-  </script>
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── GRID LINES ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      /* pointer-events: none; */
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 56px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-cta {
+      font-size: 0.8rem !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border-hover) !important;
+      padding: 0.35rem 0.9rem !important;
+      border-radius: 6px !important;
+      transition: background 0.15s, border-color 0.15s !important;
+    }
+
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.08) !important;
+      border-color: rgba(255,255,255,0.25) !important;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2.5rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      max-width: 100%;
+    }
+
+    .hero-text {
+      max-width: 680px;
+    }
+
+    .hero-name-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      margin-bottom: 1.5rem;
+    }
+
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 .line-2 {
+      color: var(--text-red);
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tagline strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #ccc;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .meta-value {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      background: var(--bg);
+      padding: 2rem 2.5rem;
+      transition: background 0.15s;
+      cursor: default;
+    }
+
+    .exp-item:hover {
+      background: var(--bg-2);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-title-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .exp-logo {
+      height: 32px;
+      width: auto;
+      padding: 6px 10px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .exp-company a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-underline-offset: 3px;
+      transition: color 0.15s, text-decoration-color 0.15s;
+    }
+
+    .exp-company a:hover {
+      color: var(--text);
+      text-decoration-color: var(--text-muted);
+    }
+
+    .exp-date {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      padding-top: 0.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+  
+    .exp-company-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-company-header .exp-company {
+      margin-top: 0;
+    }
+
+    .exp-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 0.75rem;
+    }
+
+    .exp-role-entry {
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-role-entry:last-child {
+      padding-bottom: 0.5rem;
+    }
+
+    .exp-role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 1rem;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.55rem;
+      letter-spacing: 0.02em;
+    }
+
+    .tag:hover { 
+      background: var(--bg-2); 
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .edu-item {
+      background: var(--bg);
+      padding: 2rem 2.5rem;
+      transition: background 0.15s;
+    }
+
+    .edu-item:hover { background: var(--bg-2); }
+
+    .edu-school {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .edu-degree {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-pill {
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      transition: all 0.15s;
+      cursor: default;
+    }
+
+    .skill-pill:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--bg-3);
+    }
+
+    /* ─── INTERESTS ─── */
+    .interests-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .interests-text {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .bucket-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .bucket-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .bucket-list li .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .bucket-list li.done .check {
+      background: rgba(74, 222, 128, 0.1);
+      border-color: rgba(74, 222, 128, 0.3);
+      color: var(--accent-green);
+    }
+
+    .bucket-list li.done span {
+      color: var(--text-dim);
+      /* text-decoration: line-through; */
+      text-decoration-color: var(--text-dim);
+    }
+
+    .bucket-list .progress-label {
+      width: 100%;
+    }
+
+    .bucket-list .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0rem;
+    }
+
+    .bucket-list .progress-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bucket-list .progress-fill {
+      display: block;
+      height: 100%;
+      background: var(--accent-green);
+      border-radius: 2px;
+    }
+
+    .bucket-list .progress-count {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.05s; }
+    .fade-in:nth-child(2) { animation-delay: 0.15s; }
+    .fade-in:nth-child(3) { animation-delay: 0.25s; }
+    .fade-in:nth-child(4) { animation-delay: 0.35s; }
+    .fade-in:nth-child(5) { animation-delay: 0.45s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.25rem 4rem; }
+      section { padding: 4rem 1.25rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .interests-inner { grid-template-columns: 1fr; }
+      .hero-photo { width: 60px; height: 60px; }
+      .hero-name-row { gap: 1rem; }
+      .hero-meta { flex-wrap: wrap; gap: 1.5rem; }
+      .exp-item { padding: 2rem; }
+    }
+  </style>
 </head>
+<body>
 
-<body id="page-top">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">James Hawkins</span>
-      <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-      </span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-        </li>
-      </ul>
-    </div>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#top">JH</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="mailto:contact@jameshawkins.com" class="nav-cta">Contact</a></li>
+    </ul>
   </nav>
 
-  <div class="container-fluid p-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
-      <div class="w-100">
-        <h1 class="mb-0">James
-          <span class="text-primary">Hawkins</span>
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-text">
+      <div class="hero-name-row fade-in">
+        <div class="hero-photo">
+          <img src="img/profile.jpg" alt="James Hawkins" />
+        </div>
+        <h1>
+          James<br/>
+          <span class="line-2">Hawkins</span>
         </h1>
-        <div class="subheading mb-3">(760) 333-0473 ·
-          <a href="mailto:james@jameshawkins.com">james@jameshawkins.com</a> · <a href="https://linkedin.com/in/jshawkins/" target="_blank">LinkedIn</a> · <a href="https://github.com/jameshawkinsjr/" target="_blank">GitHub</a>
-        </div>
-        <p class="lead">Technical Cofounder at <a href="https://simpledvm.com" target="_blank"><span class="simple-dvm" >@SimpleDVM</span></a></p> 
-    
-        <p class="lead ">Software engineer with experience using React, Typescript, Vercel, Node, NextJs, AWS, Redis, and more. 10+ years of experience in tech on early stage, growth companies.</p>
-
-        <p class="lead">Previously:</p>
-        <p class="lead ml-3">- Software Engineer <a href="https://ethos.com" target="_blank"><span class="ethos">@Ethos</span></a></p>
-        <p class="lead ml-3">- Fraud & Risk product team <a href="https://uber.com" target="_blank"><span class="uber">@Uber</span></a></p>
-            
       </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
-      <div class="w-100">
-        <h2 class="mb-5">Experience</h2>
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Technical Cofounder</h3>
-            <div class="subheading mb-3">Simple DVM</div>
-            <ul class="fa-ul mb-0">
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Sole software engineer
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Built a feature-rich practice management SaaS for mobile veterinarians from scratch
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Integrated third-party services including Stripe, SendGrid, Zendesk, Twilio, Google Calendar, Quickbooks, Datadog, Posthog, Slack, and various veterinary tools, among others.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Developed a myriad of features including calendar management, online booking, communications platform (SMS, email, and phone), custom PDF template generation, e-signing, invoicing, payments, inventory management, custom email templates, automations, client portal, and patient medical records.
-              </li>
-            </ul>
-              
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">August 2022 - Present</span>
-          </div>
+      <div class="hero-badge fade-in">
+        <span class="dot"></span>
+        Phoenix, AZ
+      </div>
+      <p class="hero-tagline fade-in">
+        <strong>Software engineer & technical founder</strong> with 15+ years in early-stage and growth companies.
+        I build full-stack products from zero to scale — most recently a veterinary SaaS that processed
+        <strong>$20M+ in bookings</strong> and 30k+ appointments.
+      </p>
+      <div class="hero-links fade-in">
+        <a href="mailto:contact@jameshawkins.com" class="btn btn-primary">Get in touch</a>
+        <a href="https://github.com/jameshawkinsjr/" target="_blank" class="btn btn-secondary">GitHub</a>
+        <a href="https://linkedin.com/in/jshawkins/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      </div>
+      <div class="hero-meta fade-in">
+        <div class="meta-item">
+          <span class="meta-label">Location</span>
+          <span class="meta-value">Phoenix, AZ</span>
         </div>
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Senior Full-Stack Software Engineer</h3>
-            <div class="subheading mb-3">Ethos Life</div>
-            <ul class="fa-ul mb-0">
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Team lead with 5 direct reports (Full stack developers)
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Feature-based web development in a React / Node.js application
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Design, build, and maintain public and private RESTful APIs
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Refactor a monolith to event-driven microservice architecture
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Integrate with third party vendors, including Stripe, LexisNexis, and TransUnion.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Own large product builds end-to-end, from design to post-launch.
-              </li>
-              <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Collaborate with engineering, design, and product, and analytics to develop and ship features 
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Write efficient, modular, and reusable libraries and abstractions
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                  Design and build internal tooling to improve development efficiency
-                </li>
-                <li>
-                  <i class="fa-li fas fa-check"></i>
-                  Participate in code reviews, employee training, onboarding, presentations.
-                </li>
-              </ul>
-              
-            </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">August 2019 – August 2022</span>
-          </div>
+        <div class="meta-item">
+          <span class="meta-label">Experience</span>
+          <span class="meta-value">15+ years</span>
         </div>
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Senior Manager, Product Operations: Risk & Fraud</h3>
-            <div class="subheading mb-3">Uber</div>
-            <ul class="fa-ul mb-0">
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Drove quarterly product planning cycles for six Product teams within the Risk organization.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Helped grow the Risk team from 5 to 100+ while dropping loss rates >80% in the same timeframe.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Built a global network of operations managers to monitor fraud at the regional level.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Wrote fraud rules in Python and SQL queries to debug, scope, and block attack vectors.
-              </li>
-            </ul>
-
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">February 2015 – September 2018</span>
-          </div>
+        <div class="meta-item">
+          <span class="meta-label">Stack</span>
+          <span class="meta-value">Next.js · React · Node</span>
         </div>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Senior Manager, Community Operations</h3>
-            <div class="subheading mb-3">Uber</div>
-            <ul class="fa-ul">
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Piloted and trained the first team of dedicated support representatives at Uber, laying the foundation
-                for a 20,000+ person support organization.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Defined hundreds of support policies for riders and driver-partners around the world.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Managed a team of seven employees responsible for writing support policies and managing individual
-                sub-teams
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Maintained a support SLA of < 12 hours for all support tickets in the West Coast region. </li> </ul>
-                  </div> <div class="resume-date text-md-right">
-                  <span class="text-primary">December 2012 - February 2015</span>
-          </div>
-        </div>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Second Assistant to Ashton Kutcher</h3>
-            <div class="subheading mb-3">Katalyst Films</div>
-            <ul class="fa-ul">
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Researched startups for possible investments and assemble dossiers based on findings.
-              </li>
-              <li>
-                <i class="fa-li fas fa-check"></i>
-                Documented ideas and produced presentation decks for potential investors and business partners.
-              </li>
-            </ul>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">August 2011 - December 2012</span>
-          </div>
+        <div class="meta-item">
+          <span class="meta-label">Email</span>
+          <span class="meta-value">contact@jameshawkins.com</span>
         </div>
       </div>
-
-    </section>
-
-    <hr class="m-0">
-
-
-    
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
-      <div class="w-100">
-        <h2 class="mb-5">Education</h2>
-
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
-          <div class="resume-content">
-            <h3 class="education-title mb-0 flex">App Academy</h3>
-            <div class="subheading mb-3">Full-Stack Web Development Program</div>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">January 2019 - April 2019</span>
-          </div>
-        </div>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="education-title mb-0 flex">University of Southern California</h3>
-            <div class="subheading mb-3">B.A. Economics</div>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">August 2006 - May 2010</span>
-          </div>
-        </div>
-
       </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
-      <div class="w-100">
-        <h2 class="mb-5">Skills</h2>
-
-        <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-        <ul class="list-inline dev-icons">
-
-          <li class="list-inline-item">
-            <i class="fab"><img src="./img/icons/ts.png">
-              <p>Typescript</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab"><img src="./img/icons/next.png">
-              <p>Next.js</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-react">
-              <p>React</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-html5">
-              <p>HTML5</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-css3-alt">
-              <p>CSS3</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-node-js">
-              <p>NodeJS</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-sass">
-              <p>SASS</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab "><img src="./img/icons/vercel.png">
-              <p class="">Vercel</p>
-            </i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-aws">
-              <p>AWS</p>
-            </i>
-          </li>
-        </ul>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
-      <div class="w-100">
-        <h2 class="mb-5">Interests</h2>
-        <p>In my personal life, I'm a bit of a gym rat and love to ski. I've completed a handful of marathons and it's
-          not uncommon to find me at the gym or out running. When I'm indoors, I spend a lot of time on Hacker News &
-          Reddit and, when I find the time, love to play video games (anything from PC to consoles to VR).</p>
-        <p>My current bucket list includes:</p>
-        <ul class="fa-ul">
-          <li>
-            <i class="fa-li fas fa-running"></i>
-            Finishing a marathon in under 3 hours
-          </li>
-          <li>
-            <i class="fa-li fas fa-skiing"></i>
-            Skiing on all seven continents
-          </li>
-          <li>
-            <i class="fa-li fas fa-swimmer"></i>
-            Completing an IRONMAN triathlon
-          </li>
-          <li>
-            <i class="fa-li fas fa-swimming-pool"></i>
-            Become SCUBA certified
-          </li>
-          <li>
-            <i class="fa-li fas fa-parachute-box"></i>
-            Complete a solo parachute jump
-          </li>
-          <li>
-            <i class="fa-li fas fa-paw"></i>
-            (Completed) <span class=bucket-list-complete>Join a safari in Tanzania </span>
-          </li>
-        </ul>
-        <p>I've recently caught the travel bug and am looking for new places to check out (open to suggestions -- easily
-          accessible skiing is major plus).</p>
-        <p>A few of the places on my list:</p>
-        <ul class="fa-ul">
-          <li>
-            <i class="fa-li fas fa-map-pin"></i>
-            North Dakota (It's the only US state I'm missing!)
-          </li>
-          <li>
-            <i class="fa-li fas fa-map-pin"></i>
-            Vietnam
-          </li>
-          <li>
-            <i class="fa-li fas fa-map-pin"></i>
-            Great Barrier Reef
-          </li>
-          <li>
-            <i class="fa-li fas fa-map-pin"></i>
-            Croatia
-          </li>
-          <li>
-            <i class="fa-li fas fa-map-pin"></i>
-            (Completed) <span class=bucket-list-complete>Tanzania</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-
-   
-
-    <hr class="m-0">
-
+    </div>
   </div>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Experience</p>
+    <h2>Where I've worked</h2>
+    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2.5rem; margin-top: 0.5rem;">A decade across operations, growth, and engineering — always as close to the problem as possible.</p>
 
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <div class="exp-grid">
 
-  <!-- Custom scripts for this template -->
-  <script src="js/resume.min.js"></script>
+      <div class="exp-item exp-item--grouped">
+        <div class="exp-company-header">
+          <img src="img/simpledvm.png" alt="SimpleDVM" class="exp-logo" />
+          <div>
+            <div class="exp-role" style="font-size: 1rem;"><a href="https://simpledvm.com" target="_blank" style="color: inherit; text-decoration: none;">SimpleDVM</a></div>
+            <div class="exp-company">August 2022 — January 2026</div>
+          </div>
+        </div>
+        <div class="exp-roles">
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Technical Cofounder / Senior Software Engineer</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Sole software engineer, built a feature-rich practice management SaaS for mobile veterinarians from the ground up.</li>
+              <li>Processed over $15M in bookings and 25k+ appointments in under 3 years, with 99.99% uptime.</li>
+              <li>Shipped calendar management, online booking, SMS/email/phone comms, PDF generation, e-signing, invoicing, payments, inventory management, client portal, and medical records.</li>
+              <li>Integrated Stripe, SendGrid, Twilio, Google Calendar, Quickbooks, Datadog, Posthog, Slack, and more.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Postgres</span>
+          <span class="tag">Redis</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Vercel</span>
+        </div>
+      </div>
 
-  <script type="text/javascript">
-    /* curator-feed */
-    (function () {
-      var i, e, d = document,
-        s = "script";
-      i = d.createElement("script");
-      i.async = 1;
-      i.src = "https://cdn.curator.io/published/2f2d56af-8e2b-4581-92b7-5afb8e15be96.js";
-      e = d.getElementsByTagName(s)[0];
-      e.parentNode.insertBefore(i, e);
-    })();
+      <div class="exp-item exp-item--grouped">
+        <div class="exp-company-header">
+          <img src="img/ethos.png" alt="Ethos Life" class="exp-logo" />
+          <div>
+            <div class="exp-role" style="font-size: 1rem;"><a href="https://ethos.com" target="_blank" style="color: inherit; text-decoration: none;">Ethos Life</a></div>
+            <div class="exp-company">August 2019 — August 2022</div>
+          </div>
+        </div>
+        <div class="exp-roles">
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Engineering Manager, Growth Team</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Managed a team of 5 software engineers, fostering an environment of growth, collaboration, high performance, and career development.</li>
+              <li>Served as engineering lead for the growth team, supporting multiple product teams, building user-facing products.</li>
+              <li>Drove sprint planning and prioritization to keep projects on track and ensure company KPIs were being achieved.</li>
+              <li>Spearheaded engineering strategy, execution, and future product development.</li>
+              <li>Collaborated cross-functionally with product leaders and engineering managers to align technical objectives with broader business goals.</li>
+            </ul>
+          </div>
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Senior Software Engineer, Growth Team</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Architected consumer-facing products related to the application funnel for multiple D2C insurance products.</li>
+              <li>Designed, built, and maintained public and private APIs, ensuring scalability and security.</li>
+              <li>Partnered closely with design and product teams to ideate, develop, launch, and test new features driving growth.</li>
+              <li>Integrated with third-party software across various industries (insurance, identity verification, payments).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Postgres</span>
+          <span class="tag">Docker</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Redis</span>
+        </div>
+      </div>
+
+      <div class="exp-item exp-item--grouped">
+        <div class="exp-company-header">
+          <img src="img/uber.png" alt="Uber" class="exp-logo" />
+          <div>
+            <div class="exp-role" style="font-size: 1rem;"><a href="https://uber.com" target="_blank" style="color: inherit; text-decoration: none;">Uber</a></div>
+            <div class="exp-company">December 2012 — September 2018</div>
+          </div>
+        </div>
+        <div class="exp-roles">
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Senior Manager, Risk & Fraud</div>
+              <div class="exp-date">February 2015 — September 2018</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Key role in scaling Uber's Risk team from 5 to 100+ employees while reducing loss rates by over 80%.</li>
+              <li>Investigated fraud attack vectors and developed rules, products, and features to reduce fraudulent activity.</li>
+              <li>Drove quarterly product planning and KPI tracking across six Product teams within the Risk organization.</li>
+              <li>Wrote fraud detection rules in Python and SQL to scope and block attack vectors.</li>
+            </ul>
+          </div>
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Senior Manager, Community Operations</div>
+              <div class="exp-date">December 2012 — February 2015</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Piloted and trained the first team of dedicated support reps at Uber — the foundation of a 20,000+ person support org.</li>
+              <li>Defined hundreds of support policies for riders and driver-partners around the world.</li>
+              <li>Managed a team of 7 and maintained a sub-12-hour support SLA across the West Coast region.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item exp-item--grouped">
+        <div class="exp-company-header">
+          <div>
+            <div class="exp-role" style="font-size: 1rem;">Ashton Kutcher</div>
+            <div class="exp-company">August 2011 — December 2012</div>
+          </div>
+        </div>
+        <div class="exp-roles">
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <div class="exp-role">Second Assistant</div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Researched startups for potential investments and assembled dossiers for evaluation.</li>
+              <li>Produced presentation decks for potential investors and business partners.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Education</p>
+    <h2>Background</h2>
+    <div class="edu-grid" style="margin-top: 2rem;">
+      <div class="edu-item">
+        <div class="edu-school">App Academy</div>
+        <div class="edu-degree">Full-Stack Web Development</div>
+        <div class="edu-date">January — Apr 2019</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-school">University of Southern California</div>
+        <div class="edu-degree">B.A., Economics</div>
+        <div class="edu-date">August 2006 — May 2010</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Skills</p>
+    <h2>Tech stack</h2>
+    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2rem; margin-top: 0.5rem;">Tools I reach for to build production systems.</p>
+    <div class="skills-grid">
+      <span class="skill-pill">TypeScript</span>
+      <span class="skill-pill">JavaScript</span>
+      <span class="skill-pill">React</span>
+      <span class="skill-pill">Next.js</span>
+      <span class="skill-pill">Node.js</span>
+      <span class="skill-pill">HTML5</span>
+      <span class="skill-pill">CSS3</span>
+      <span class="skill-pill">SASS</span>
+      <span class="skill-pill">PostgreSQL</span>
+      <span class="skill-pill">Redis</span>
+      <span class="skill-pill">AWS</span>
+      <span class="skill-pill">Vercel</span>
+      <span class="skill-pill">Docker</span>
+      <span class="skill-pill">S3</span>
+      <span class="skill-pill">Stripe</span>
+      <span class="skill-pill">Twilio</span>
+      <span class="skill-pill">SendGrid</span>
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">SQL</span>
+      <span class="skill-pill">REST APIs</span>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <p class="section-label">Interests</p>
+    <h2>Outside of work</h2>
+    <div class="interests-inner" style="margin-top: 2rem;">
+      <div>
+        <p class="interests-text">
+          When I'm not building software, you'll usually find me moving. I'm a regular at the gym, have run several marathons, and am working toward an IRONMAN. Skiing is a genuine passion — I've skied across the US and internationally, and have an ambition to ski on all seven continents. I'm also a big Formula 1 fan and try to catch as many races in person as I can.
+        </p>
+        <p class="interests-text" style="margin-top: 1rem;">
+          I'm also a frequent traveler with a growing list of destinations. I live in <strong style="color: var(--text);">Phoenix, AZ</strong> with my 2 beautiful huskies, and spend a lot of time on Hacker News when I'm not outdoors.
+        </p>
+      </div>
+      <div>
+        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;">Bucket list</p>
+        <ul class="bucket-list">
+          <li class="done"><span class="check">✓</span><span>Join a safari in Tanzania</span></li>
+          <li><span class="check"></span><span>Sub-3-hour marathon</span></li>
+          <li><span class="check"></span><span>Complete an IRONMAN triathlon</span></li>
+          <li><span class="check"></span><span>Ski all seven continents</span></li>
+          <li><span class="check"></span><span>Get SCUBA certified</span></li>
+          <li><span class="check"></span><span>Solo parachute jump</span></li>
+          <li><span class="check"></span><span>Visit all 50 US states (Missing: North Dakota)</span></li>
+          <li><span class="check"></span><span>Attend 24 F1 races (Attended: Montreal, Austin, Zandvoort, Monza)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    // Intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.style.opacity = '1';
+          el.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.exp-item, .edu-item, .skill-pill').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(12px)';
+      el.style.transition = `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s`;
+      observer.observe(el);
+    });
   </script>
 
 </body>
-
 </html>
