@@ -1,27 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="James Hawkins Resume Portfolio">
-  <meta name="author" content="James Hawkins">
-  <title>James Hawkins</title>
+
+  <!-- Primary SEO -->
+  <title>James Hawkins &mdash; Software Engineer &amp; Technical Founder | Phoenix, AZ</title>
+  <meta name="description" content="James Hawkins — software engineer &amp; technical founder in Phoenix, AZ. 15+ years building full-stack products at Uber, Ethos, and SimpleDVM ($20M+ in bookings)." />
+  <meta name="author" content="James Hawkins" />
+  <meta name="robots" content="max-image-preview:large" />
+  <link rel="canonical" href="https://jameshawkins.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="James Hawkins" />
+  <meta property="og:url" content="https://jameshawkins.com/" />
+  <meta property="og:title" content="James Hawkins — Software Engineer &amp; Technical Founder" />
+  <meta property="og:description" content="Software engineer &amp; technical founder in Phoenix, AZ. 15+ years building full-stack products at Uber, Ethos, and SimpleDVM ($20M+ in bookings)." />
+  <meta property="og:image" content="https://jameshawkins.com/img/profile.jpg" />
+  <meta property="og:image:width" content="677" />
+  <meta property="og:image:height" content="677" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="Portrait of James Hawkins" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="James Hawkins — Software Engineer &amp; Technical Founder" />
+  <meta name="twitter:description" content="Software engineer &amp; technical founder in Phoenix, AZ. 15+ years building full-stack products at Uber, Ethos, and SimpleDVM ($20M+ in bookings)." />
+  <meta name="twitter:image" content="https://jameshawkins.com/img/profile.jpg" />
+  <meta name="twitter:image:alt" content="Portrait of James Hawkins" />
+
+  <!-- Icons & UI -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#080808" />
+
+  <!-- Fonts (pruned to weights actually used; non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137238311-1"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
- 
-     function gtag() {
-       dataLayer.push(arguments);
-     }
-     gtag('js', new Date());
- 
-     gtag('config', 'UA-137238311-1');
-   </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&amp;family=JetBrains+Mono&amp;display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&amp;family=JetBrains+Mono&amp;display=swap" /></noscript>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jameshawkins.com/#website",
+        "url": "https://jameshawkins.com/",
+        "name": "James Hawkins",
+        "description": "Portfolio of James Hawkins, software engineer and technical founder in Phoenix, AZ.",
+        "publisher": { "@id": "https://jameshawkins.com/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://jameshawkins.com/#profilepage",
+        "url": "https://jameshawkins.com/",
+        "name": "James Hawkins",
+        "isPartOf": { "@id": "https://jameshawkins.com/#website" },
+        "mainEntity": { "@id": "https://jameshawkins.com/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jameshawkins.com/#person",
+        "name": "James Hawkins",
+        "url": "https://jameshawkins.com/",
+        "image": "https://jameshawkins.com/img/profile.jpg",
+        "jobTitle": "Software Engineer & Technical Founder",
+        "description": "Software engineer & technical founder with 15+ years in early-stage and growth companies. Builds full-stack products from zero to scale.",
+        "email": "contact@jameshawkins.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Phoenix",
+          "addressRegion": "AZ",
+          "addressCountry": "US"
+        },
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Southern California"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "App Academy"
+          }
+        ],
+        "knowsAbout": [
+          "TypeScript", "JavaScript", "React", "Next.js", "Node.js",
+          "HTML5", "CSS3", "SASS", "PostgreSQL", "Redis", "AWS",
+          "Vercel", "Docker", "S3", "Stripe", "Twilio", "SendGrid",
+          "Python", "SQL", "REST APIs"
+        ],
+        "sameAs": [
+          "https://github.com/jameshawkinsjr/",
+          "https://linkedin.com/in/jshawkins/"
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -39,7 +121,7 @@
       --accent-green: #4ade80;
       --accent-blue: #60a5fa;
       --font-display: 'Inter', sans-serif;
-      --font-body: 'Roboto', sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -75,7 +157,7 @@
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 80px 80px;
-      /* pointer-events: none; */
+      pointer-events: none;
       z-index: 0;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
     }
@@ -675,14 +757,15 @@
     }
 
     /* ─── ANIMATIONS ─── */
+    /* Content paints immediately (no opacity:0 start) so the LCP element
+       isn't delayed by the entrance animation */
     .fade-in {
-      opacity: 0;
       transform: translateY(16px);
       animation: fadeIn 0.6s ease forwards;
     }
 
     @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
+      to { transform: translateY(0); }
     }
 
     .fade-in:nth-child(1) { animation-delay: 0.05s; }
@@ -694,7 +777,9 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 700px) {
       nav { padding: 0 1.25rem; }
-      .nav-links { display: none; }
+      /* Hide section anchors on phones but keep the Contact CTA reachable */
+      .nav-links li:not(:last-child) { display: none; }
+      .nav-links { gap: 0; }
       .hero { padding: 7rem 1.25rem 4rem; }
       section { padding: 4rem 1.25rem; }
       .edu-grid { grid-template-columns: 1fr; }
@@ -709,8 +794,8 @@
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#top">JH</a>
+  <nav aria-label="Main navigation">
+    <a class="nav-logo" href="#top" aria-label="James Hawkins — back to top">JH</a>
     <ul class="nav-links">
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
@@ -721,22 +806,23 @@
   </nav>
 
   <!-- HERO -->
-  <div class="hero" id="top">
+  <main id="main">
+  <header class="hero" id="top">
     <div class="hero-inner">
       <div class="hero-text">
       <div class="hero-name-row fade-in">
         <div class="hero-photo">
-          <img src="img/profile.jpg" alt="James Hawkins" />
+          <img src="img/profile-160.jpg" alt="James Hawkins, software engineer and technical founder in Phoenix, AZ" width="160" height="160" fetchpriority="high" decoding="async" />
         </div>
         <h1>
           James<br/>
           <span class="line-2">Hawkins</span>
         </h1>
       </div>
-      <div class="hero-badge fade-in">
+      <p class="hero-badge fade-in">
         <span class="dot"></span>
-        Phoenix, AZ
-      </div>
+        Software Engineer · Phoenix, AZ
+      </p>
       <p class="hero-tagline fade-in">
         <strong>Software engineer & technical founder</strong> with 15+ years in early-stage and growth companies.
         I build full-stack products from zero to scale — most recently a veterinary SaaS that processed
@@ -744,8 +830,8 @@
       </p>
       <div class="hero-links fade-in">
         <a href="mailto:contact@jameshawkins.com" class="btn btn-primary">Get in touch</a>
-        <a href="https://github.com/jameshawkinsjr/" target="_blank" class="btn btn-secondary">GitHub</a>
-        <a href="https://linkedin.com/in/jshawkins/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+        <a href="https://github.com/jameshawkinsjr/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+        <a href="https://linkedin.com/in/jshawkins/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">LinkedIn</a>
       </div>
       <div class="hero-meta fade-in">
         <div class="meta-item">
@@ -767,32 +853,32 @@
       </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- EXPERIENCE -->
   <section id="experience">
     <p class="section-label">Experience</p>
-    <h2>Where I've worked</h2>
-    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2.5rem; margin-top: 0.5rem;">A decade across operations, growth, and engineering — always as close to the problem as possible.</p>
+    <h2>Software engineering experience</h2>
+    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2.5rem; margin-top: 0.5rem;">Fifteen years across operations, growth, and engineering — always as close to the problem as possible.</p>
 
     <div class="exp-grid">
 
       <div class="exp-item exp-item--grouped">
         <div class="exp-company-header">
-          <img src="img/simpledvm.png" alt="SimpleDVM" class="exp-logo" />
+          <img src="img/simpledvm.png" alt="SimpleDVM logo" class="exp-logo" width="200" height="50" loading="lazy" decoding="async" />
           <div>
-            <div class="exp-role" style="font-size: 1rem;"><a href="https://simpledvm.com" target="_blank" style="color: inherit; text-decoration: none;">SimpleDVM</a></div>
+            <h3 class="exp-role" style="font-size: 1rem;"><a href="https://simpledvm.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">SimpleDVM</a></h3>
             <div class="exp-company">August 2022 — January 2026</div>
           </div>
         </div>
         <div class="exp-roles">
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Technical Cofounder / Senior Software Engineer</div>
+              <h4 class="exp-role">Technical Cofounder / Senior Software Engineer</h4>
             </div>
             <ul class="exp-bullets">
               <li>Sole software engineer, built a feature-rich practice management SaaS for mobile veterinarians from the ground up.</li>
-              <li>Processed over $15M in bookings and 25k+ appointments in under 3 years, with 99.99% uptime.</li>
+              <li>Processed over $20M in bookings and 30k+ appointments in under 3 years, with 99.99% uptime.</li>
               <li>Shipped calendar management, online booking, SMS/email/phone comms, PDF generation, e-signing, invoicing, payments, inventory management, client portal, and medical records.</li>
               <li>Integrated Stripe, SendGrid, Twilio, Google Calendar, Quickbooks, Datadog, Posthog, Slack, and more.</li>
             </ul>
@@ -812,16 +898,16 @@
 
       <div class="exp-item exp-item--grouped">
         <div class="exp-company-header">
-          <img src="img/ethos.png" alt="Ethos Life" class="exp-logo" />
+          <img src="img/ethos.png" alt="Ethos Life logo" class="exp-logo" width="345" height="64" loading="lazy" decoding="async" />
           <div>
-            <div class="exp-role" style="font-size: 1rem;"><a href="https://ethos.com" target="_blank" style="color: inherit; text-decoration: none;">Ethos Life</a></div>
+            <h3 class="exp-role" style="font-size: 1rem;"><a href="https://ethos.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Ethos Life</a></h3>
             <div class="exp-company">August 2019 — August 2022</div>
           </div>
         </div>
         <div class="exp-roles">
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Engineering Manager, Growth Team</div>
+              <h4 class="exp-role">Engineering Manager, Growth Team</h4>
             </div>
             <ul class="exp-bullets">
               <li>Managed a team of 5 software engineers, fostering an environment of growth, collaboration, high performance, and career development.</li>
@@ -833,7 +919,7 @@
           </div>
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Senior Software Engineer, Growth Team</div>
+              <h4 class="exp-role">Senior Software Engineer, Growth Team</h4>
             </div>
             <ul class="exp-bullets">
               <li>Architected consumer-facing products related to the application funnel for multiple D2C insurance products.</li>
@@ -856,16 +942,16 @@
 
       <div class="exp-item exp-item--grouped">
         <div class="exp-company-header">
-          <img src="img/uber.png" alt="Uber" class="exp-logo" />
+          <img src="img/uber.png" alt="Uber logo" class="exp-logo" width="960" height="337" loading="lazy" decoding="async" />
           <div>
-            <div class="exp-role" style="font-size: 1rem;"><a href="https://uber.com" target="_blank" style="color: inherit; text-decoration: none;">Uber</a></div>
+            <h3 class="exp-role" style="font-size: 1rem;"><a href="https://uber.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Uber</a></h3>
             <div class="exp-company">December 2012 — September 2018</div>
           </div>
         </div>
         <div class="exp-roles">
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Senior Manager, Risk & Fraud</div>
+              <h4 class="exp-role">Senior Manager, Risk & Fraud</h4>
             </div>
             <ul class="exp-bullets">
               <li>Key role in scaling Uber's Risk team from 5 to 100+ employees while reducing loss rates by over 80%.</li>
@@ -876,7 +962,7 @@
           </div>
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Senior Manager, Community Operations</div>
+              <h4 class="exp-role">Senior Manager, Community Operations</h4>
             </div>
             <ul class="exp-bullets">
               <li>Piloted and trained the first team of dedicated support reps at Uber — the foundation of a 20,000+ person support org.</li>
@@ -890,14 +976,14 @@
       <div class="exp-item exp-item--grouped">
         <div class="exp-company-header">
           <div>
-            <div class="exp-role" style="font-size: 1rem;">Ashton Kutcher</div>
+            <h3 class="exp-role" style="font-size: 1rem;">Ashton Kutcher</h3>
             <div class="exp-company">August 2011 — December 2012</div>
           </div>
         </div>
         <div class="exp-roles">
           <div class="exp-role-entry">
             <div class="exp-role-header">
-              <div class="exp-role">Second Assistant</div>
+              <h4 class="exp-role">Second Assistant</h4>
             </div>
             <ul class="exp-bullets">
               <li>Researched startups for potential investments and assembled dossiers for evaluation.</li>
@@ -913,15 +999,15 @@
   <!-- EDUCATION -->
   <section id="education">
     <p class="section-label">Education</p>
-    <h2>Background</h2>
+    <h2>Education</h2>
     <div class="edu-grid" style="margin-top: 2rem;">
       <div class="edu-item">
-        <div class="edu-school">App Academy</div>
+        <h3 class="edu-school">App Academy</h3>
         <div class="edu-degree">Full-Stack Web Development</div>
         <div class="edu-date">January — April 2019</div>
       </div>
       <div class="edu-item">
-        <div class="edu-school">University of Southern California</div>
+        <h3 class="edu-school">University of Southern California</h3>
         <div class="edu-degree">B.A., Economics</div>
         <div class="edu-date">August 2006 — May 2010</div>
       </div>
@@ -931,7 +1017,7 @@
   <!-- SKILLS -->
   <section id="skills">
     <p class="section-label">Skills</p>
-    <h2>Tech stack</h2>
+    <h2>Engineering tech stack</h2>
     <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2rem; margin-top: 0.5rem;">Tools I reach for to build production systems.</p>
     <div class="skills-grid">
       <span class="skill-pill">TypeScript</span>
@@ -960,7 +1046,7 @@
   <!-- INTERESTS -->
   <section id="interests">
     <p class="section-label">Interests</p>
-    <h2>Outside of work</h2>
+    <h2>Life outside of work</h2>
     <div class="interests-inner" style="margin-top: 2rem;">
       <div>
         <p class="interests-text">
@@ -985,25 +1071,46 @@
       </div>
     </div>
   </section>
+  </main>
 
+  <!-- FOOTER -->
+  <footer style="position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2.5rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <p>&copy; 2026 James Hawkins — Software Engineer &amp; Technical Founder, Phoenix, AZ</p>
+    <p>
+      <a href="mailto:contact@jameshawkins.com" style="color: var(--text-muted);">contact@jameshawkins.com</a> ·
+      <a href="https://github.com/jameshawkinsjr/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted);">GitHub</a> ·
+      <a href="https://linkedin.com/in/jshawkins/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted);">LinkedIn</a>
+    </p>
+  </footer>
 
   <script>
-    // Intersection observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => {
-        if (el.isIntersecting) {
-          el.target.style.opacity = '1';
-          el.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.08 });
+    // Intersection observer for scroll animations (skipped for reduced-motion users)
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(el => {
+          if (el.isIntersecting) {
+            el.target.style.opacity = '1';
+            el.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.08 });
 
-    document.querySelectorAll('.exp-item, .edu-item, .skill-pill').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s`;
-      observer.observe(el);
-    });
+      document.querySelectorAll('.exp-item, .edu-item, .skill-pill').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(12px)';
+        el.style.transition = `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s`;
+        observer.observe(el);
+      });
+    }
+  </script>
+
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-09HHJW4C1K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-09HHJW4C1K');
   </script>
 
 </body>
