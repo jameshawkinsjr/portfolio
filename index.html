@@ -91,9 +91,9 @@
         ],
         "knowsAbout": [
           "TypeScript", "JavaScript", "React", "Next.js", "Node.js",
-          "HTML5", "CSS3", "SASS", "PostgreSQL", "Redis", "AWS",
-          "Vercel", "Docker", "S3", "Stripe", "Twilio", "SendGrid",
-          "Python", "SQL", "REST APIs"
+          "HTML5", "CSS3", "SASS", "Tailwind CSS", "PostgreSQL", "Drizzle",
+          "Redis", "AWS", "Vercel", "Docker", "S3", "Stripe", "Twilio",
+          "SendGrid", "Python", "SQL", "REST APIs", "Claude", "OpenAI"
         ],
         "sameAs": [
           "https://github.com/jameshawkinsjr/",
@@ -484,6 +484,12 @@
       flex-shrink: 0;
     }
 
+    /* Light/white logos (e.g. Swoopd) stay legible on a dark chip */
+    .exp-logo--ondark {
+      background: var(--bg-3);
+      border-color: var(--border-hover);
+    }
+
 
     .exp-role {
       font-family: var(--font-display);
@@ -825,8 +831,8 @@
       </p>
       <p class="hero-tagline fade-in">
         <strong>Software engineer & technical founder</strong> with 15+ years in early-stage and growth companies.
-        I build full-stack products from zero to scale — most recently a veterinary SaaS that processed
-        <strong>$20M+ in bookings</strong> and 30k+ appointments.
+        I build full-stack products from zero to scale — currently building <strong>Swoopd.ai</strong>, an AI-powered
+        job-discovery platform, and previously a veterinary SaaS that processed <strong>$20M+ in bookings</strong> and 30k+ appointments.
       </p>
       <div class="hero-links fade-in">
         <a href="mailto:contact@jameshawkins.com" class="btn btn-primary">Get in touch</a>
@@ -862,6 +868,40 @@
     <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom: 2.5rem; margin-top: 0.5rem;">Fifteen years across operations, growth, and engineering — always as close to the problem as possible.</p>
 
     <div class="exp-grid">
+
+      <div class="exp-item exp-item--grouped">
+        <div class="exp-company-header">
+          <img src="img/swoopd.png" alt="Swoopd logo" class="exp-logo exp-logo--ondark" width="329" height="101" loading="lazy" decoding="async" />
+          <div>
+            <h3 class="exp-role" style="font-size: 1rem;"><a href="https://swoopd.ai" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Swoopd.ai</a></h3>
+            <div class="exp-company">January 2026 — Present</div>
+          </div>
+        </div>
+        <div class="exp-roles">
+          <div class="exp-role-entry">
+            <div class="exp-role-header">
+              <h4 class="exp-role">Founder &amp; Software Engineer</h4>
+            </div>
+            <ul class="exp-bullets">
+              <li>Building an AI-powered job-discovery platform solo from the ground up.</li>
+              <li>Built an ingestion engine that discovers and de-dupes thousands of company job boards across every major ATS (Ashby, Greenhouse, and more), plus paid APIs and LinkedIn, into a unified relational database.</li>
+              <li>Implemented hybrid semantic search (pgvector + OpenAI embeddings fused with Postgres full-text ranking) and AI job-matching via Claude's Message Batches API for a ~50% cost reduction.</li>
+              <li>Shipped Stripe subscription billing, a per-user credit and cost-governance system, and a sharded cron pipeline for ingestion, scoring, embedding, and archival.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Postgres</span>
+          <span class="tag">pgvector</span>
+          <span class="tag">Claude</span>
+          <span class="tag">OpenAI</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">Vercel</span>
+        </div>
+      </div>
 
       <div class="exp-item exp-item--grouped">
         <div class="exp-company-header">
@@ -1028,7 +1068,9 @@
       <span class="skill-pill">HTML5</span>
       <span class="skill-pill">CSS3</span>
       <span class="skill-pill">SASS</span>
+      <span class="skill-pill">Tailwind CSS</span>
       <span class="skill-pill">PostgreSQL</span>
+      <span class="skill-pill">Drizzle</span>
       <span class="skill-pill">Redis</span>
       <span class="skill-pill">AWS</span>
       <span class="skill-pill">Vercel</span>
@@ -1040,6 +1082,8 @@
       <span class="skill-pill">Python</span>
       <span class="skill-pill">SQL</span>
       <span class="skill-pill">REST APIs</span>
+      <span class="skill-pill">Claude</span>
+      <span class="skill-pill">OpenAI</span>
     </div>
   </section>
 
