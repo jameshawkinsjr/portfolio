@@ -244,6 +244,8 @@ async function pageAudit() {
     for (let n = el; n; n = n.parentElement) {
       const cs = getComputedStyle(n);
       if (cs.backgroundImage !== 'none') return null;
+      // A decorative ::before/::after background (e.g. a gradient band) may sit behind the text.
+      if (n !== el && ['::before', '::after'].some((p) => { const ps = getComputedStyle(n, p); return ps.content !== 'none' && ps.backgroundImage !== 'none'; })) return null;
       const c = parse(cs.backgroundColor);
       if (c && c[3] > 0) { layers.push(c); if (c[3] >= 1) break; }
     }
