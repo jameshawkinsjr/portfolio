@@ -209,10 +209,29 @@ async function pageAudit() {
   await new Promise((r) => setTimeout(r, 200));
 
   const docW = document.documentElement.clientWidth;
-  const overflow = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - docW;
-  const widest = overflow > 0
-    ? [...document.querySelectorAll('body *')].filter((el) => el.getBoundingClientRect().right > docW + 1).slice(0, 4).map((el) => el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''))
-    : [];
+  // body { overflow-x: hidden } (and overflow:hidden cards) hide overflow from
+  // scrollWidth while still cutting content off, so flag any element poking
+  // past the viewport unless it sits in an intentional horizontal scroller.
+  const clippedByAncestor = (el) => {
+    for (let n = el.parentElement; n && n !== document.body; n = n.parentElement) {
+      const ox = getComputedStyle(n).overflowX;
+      if (ox === 'auto' || ox === 'scroll') return true;
+    }
+    return false;
+  };
+  const offenders = [...document.querySelectorAll('body *')].filter((el) => {
+    const r = el.getBoundingClientRect();
+    if (!r.width || r.right <= docW + 1) return false;
+    const cs = getComputedStyle(el);
+    if (cs.position === 'fixed' && r.left >= docW) return false;
+    return !clippedByAncestor(el);
+  });
+  const overflow = Math.max(
+    Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - docW,
+    ...offenders.map((el) => Math.ceil(el.getBoundingClientRect().right - docW)),
+    0,
+  );
+  const widest = offenders.slice(0, 4).map((el) => el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''));
   const brokenImages = imgs.filter((i) => !i.naturalWidth).map((i) => i.getAttribute('src'));
   const failedFonts = [...document.fonts].filter((f) => f.status === 'error').map((f) => `${f.family} ${f.weight}`);
 
