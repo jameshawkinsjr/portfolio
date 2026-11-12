@@ -2,8 +2,10 @@
 // Checks the generated variants in templates/ against index.html.
 //
 // Static checks (always):
-//   - each variant's <body> markup equals index.html's (minus GA4, with img
-//     paths rebased) and its visible text equals index.html's, ignoring <title>
+//   - content/profile.json passes scripts/check-content.mjs
+//   - index.html is up to date with content/ and site/ (scripts/build-site.mjs)
+//   - each variant's <body> equals the shared renderBody() markup (img paths
+//     rebased) and its visible text equals the live index.html's, ignoring <title>
 //   - noindex + canonical present; no gtag / googletagmanager / JSON-LD
 //   - every local src/href resolves to a file on disk (works from file://)
 // Browser checks (skipped with --static; needs Google Chrome, or set CHROME):
@@ -22,7 +24,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { variants } from './variants.mjs';
-import { extractBody } from './build-variants.mjs';
+import { variantBody } from './build-variants.mjs';
+import { renderSite } from './build-site.mjs';
+import { checkContent } from './check-content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -47,16 +51,19 @@ function visibleText(html) {
     .trim();
 }
 
+for (const p of checkContent()) failures.push(`content: ${p}`);
 const indexHtml = readFileSync(join(root, 'index.html'), 'utf8');
+if (indexHtml !== renderSite()) failures.push('index.html: out of date with content/ or site/ (run node scripts/build-site.mjs)');
+// Visible text of the live page, minus the script bodies.
 const indexText = visibleText(indexHtml);
-const indexBody = extractBody(indexHtml);
+const indexBody = variantBody();
 
 for (const v of selected) {
   const file = join(root, 'templates', v.slug, 'index.html');
   if (!existsSync(file)) { fail(v.slug, 'not built (run node scripts/build-variants.mjs)'); continue; }
   const html = readFileSync(file, 'utf8');
   const body = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i) || [])[1];
-  if (body !== indexBody) fail(v.slug, 'body markup differs from index.html — rebuild');
+  if (body !== indexBody) fail(v.slug, 'body markup differs from the shared renderBody() output — rebuild');
   const text = visibleText(html);
   if (text !== indexText) {
     let i = 0;

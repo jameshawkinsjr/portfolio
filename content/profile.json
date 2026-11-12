@@ -1,0 +1,202 @@
+{
+  "site": {
+    "url": "https://jameshawkins.com/",
+    "analyticsId": "G-09HHJW4C1K",
+    "websiteDescription": "Portfolio of James Hawkins, software engineer and technical founder in Phoenix, AZ."
+  },
+  "person": {
+    "name": "James Hawkins",
+    "jobTitle": "Software Engineer & Technical Founder",
+    "summary": "Software engineer & technical founder in Phoenix, AZ. 15+ years building full-stack products at companies like Uber, Ethos, and Alltus.",
+    "schemaDescription": "Software engineer & technical founder with 15+ years in early-stage and growth companies. Builds full-stack products from zero to scale.",
+    "email": "contact@jameshawkins.com",
+    "location": { "label": "Phoenix, AZ", "city": "Phoenix", "region": "AZ", "country": "US" },
+    "image": { "src": "img/profile.jpg", "width": 677, "height": 677, "alt": "Portrait of James Hawkins" },
+    "social": [
+      { "label": "GitHub", "url": "https://github.com/jameshawkinsjr/" },
+      { "label": "LinkedIn", "url": "https://linkedin.com/in/jshawkins/" }
+    ]
+  },
+  "nav": {
+    "logo": "JH",
+    "logoLabel": "James Hawkins — back to top",
+    "links": [
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Education", "href": "#education" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Interests", "href": "#interests" }
+    ],
+    "cta": "Contact"
+  },
+  "hero": {
+    "firstName": "James",
+    "lastName": "Hawkins",
+    "photo": { "src": "img/profile-160.jpg", "alt": "James Hawkins, software engineer and technical founder in Phoenix, AZ", "width": 160, "height": 160 },
+    "badge": "Software Engineer · Phoenix, AZ",
+    "taglineHtml": "<strong>Software engineer &amp; technical founder</strong> with 15+ years in early-stage and growth companies. I build full-stack products from zero to scale — currently a Senior Software Engineer at <strong>Alltus</strong>, and previously at companies like <strong>Uber</strong> and <strong>Ethos Life</strong>.",
+    "primaryCta": "Get in touch",
+    "meta": [
+      { "label": "Location", "value": "Phoenix, AZ" },
+      { "label": "Experience", "value": "15+ years" },
+      { "label": "Stack", "value": "Next.js · React · Node" },
+      { "label": "Email", "value": "contact@jameshawkins.com" }
+    ]
+  },
+  "experience": {
+    "label": "Experience",
+    "heading": "Software engineering experience",
+    "intro": "Fifteen years across operations, growth, and engineering — always as close to the problem as possible.",
+    "items": [
+      {
+        "company": "Alltus",
+        "url": "https://alltus.com",
+        "logo": { "src": "img/alltus.png", "alt": "Alltus logo", "width": 345, "height": 96 },
+        "dates": "September 2026 — Present",
+        "roles": [
+          { "title": "Senior Software Engineer", "bullets": ["Building full-stack products and features as a key member of the engineering team."] }
+        ],
+        "tags": ["TypeScript", "React", "Node.js", "PostgreSQL"]
+      },
+      {
+        "company": "SimpleCareer",
+        "url": "https://simplecareer.com",
+        "logo": { "src": "img/simplecareer.png", "alt": "SimpleCareer logo", "width": 1002, "height": 240 },
+        "dates": "January 2026 — September 2026",
+        "roles": [
+          {
+            "title": "Founder & Software Engineer",
+            "bullets": [
+              "Building an AI-powered job-discovery platform solo from the ground up.",
+              "Built an ingestion engine that discovers and de-dupes thousands of company job boards across every major ATS (Ashby, Greenhouse, and more), plus paid APIs and LinkedIn, into a unified relational database.",
+              "Implemented hybrid semantic search (pgvector + OpenAI embeddings fused with Postgres full-text ranking) and AI job-matching via Claude's Message Batches API for a ~50% cost reduction.",
+              "Shipped Stripe subscription billing, a per-user credit and cost-governance system, and a sharded cron pipeline for ingestion, scoring, embedding, and archival."
+            ]
+          }
+        ],
+        "tags": ["Next.js", "TypeScript", "React", "Postgres", "pgvector", "Claude", "OpenAI", "Stripe", "Vercel"]
+      },
+      {
+        "company": "SimpleDVM",
+        "url": "https://simpledvm.com",
+        "logo": { "src": "img/simpledvm.png", "alt": "SimpleDVM logo", "width": 200, "height": 50 },
+        "dates": "August 2022 — January 2026",
+        "roles": [
+          {
+            "title": "Technical Cofounder / Senior Software Engineer",
+            "bullets": [
+              "Sole software engineer, built a feature-rich practice management SaaS for mobile veterinarians from the ground up.",
+              "Processed over $20M in bookings and 30k+ appointments in under 3 years, with 99.99% uptime.",
+              "Shipped calendar management, online booking, SMS/email/phone comms, PDF generation, e-signing, invoicing, payments, inventory management, client portal, and medical records.",
+              "Integrated Stripe, SendGrid, Twilio, Google Calendar, Quickbooks, Datadog, Posthog, Slack, and more."
+            ]
+          }
+        ],
+        "tags": ["Next.js", "TypeScript", "React", "Node.js", "Postgres", "Redis", "AWS", "Vercel"]
+      },
+      {
+        "company": "Ethos Life",
+        "url": "https://ethos.com",
+        "logo": { "src": "img/ethos.png", "alt": "Ethos Life logo", "width": 345, "height": 64 },
+        "dates": "August 2019 — August 2022",
+        "roles": [
+          {
+            "title": "Engineering Manager, Growth Team",
+            "bullets": [
+              "Managed a team of 5 software engineers, fostering an environment of growth, collaboration, high performance, and career development.",
+              "Served as engineering lead for the growth team, supporting multiple product teams, building user-facing products.",
+              "Drove sprint planning and prioritization to keep projects on track and ensure company KPIs were being achieved.",
+              "Spearheaded engineering strategy, execution, and future product development.",
+              "Collaborated cross-functionally with product leaders and engineering managers to align technical objectives with broader business goals."
+            ]
+          },
+          {
+            "title": "Senior Software Engineer, Growth Team",
+            "bullets": [
+              "Architected consumer-facing products related to the application funnel for multiple D2C insurance products.",
+              "Designed, built, and maintained public and private APIs, ensuring scalability and security.",
+              "Partnered closely with design and product teams to ideate, develop, launch, and test new features driving growth.",
+              "Integrated with third-party software across various industries (insurance, identity verification, payments)."
+            ]
+          }
+        ],
+        "tags": ["React", "Node.js", "TypeScript", "Postgres", "Docker", "AWS", "Redis"]
+      },
+      {
+        "company": "Uber",
+        "url": "https://uber.com",
+        "logo": { "src": "img/uber.png", "alt": "Uber logo", "width": 960, "height": 337 },
+        "dates": "December 2012 — September 2018",
+        "roles": [
+          {
+            "title": "Senior Manager, Risk & Fraud",
+            "bullets": [
+              "Key role in scaling Uber's Risk team from 5 to 100+ employees while reducing loss rates by over 80%.",
+              "Investigated fraud attack vectors and developed rules, products, and features to reduce fraudulent activity.",
+              "Drove quarterly product planning and KPI tracking across six Product teams within the Risk organization.",
+              "Wrote fraud detection rules in Python and SQL to scope and block attack vectors."
+            ]
+          },
+          {
+            "title": "Senior Manager, Community Operations",
+            "bullets": [
+              "Piloted and trained the first team of dedicated support reps at Uber — the foundation of a 20,000+ person support org.",
+              "Defined hundreds of support policies for riders and driver-partners around the world.",
+              "Managed a team of 7 and maintained a sub-12-hour support SLA across the West Coast region."
+            ]
+          }
+        ],
+        "tags": []
+      },
+      {
+        "company": "Ashton Kutcher",
+        "dates": "August 2011 — December 2012",
+        "roles": [
+          {
+            "title": "Second Assistant",
+            "bullets": [
+              "Researched startups for potential investments and assembled dossiers for evaluation.",
+              "Produced presentation decks for potential investors and business partners."
+            ]
+          }
+        ],
+        "tags": []
+      }
+    ]
+  },
+  "education": {
+    "label": "Education",
+    "heading": "Education",
+    "items": [
+      { "school": "App Academy", "degree": "Full-Stack Web Development", "dates": "January — April 2019", "schemaType": "EducationalOrganization" },
+      { "school": "University of Southern California", "degree": "B.A., Economics", "dates": "August 2006 — May 2010", "schemaType": "CollegeOrUniversity" }
+    ]
+  },
+  "skills": {
+    "label": "Skills",
+    "heading": "Engineering tech stack",
+    "intro": "Tools I reach for to build production systems.",
+    "items": ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "HTML5", "CSS3", "SASS", "Tailwind CSS", "PostgreSQL", "Drizzle", "Redis", "AWS", "Vercel", "Docker", "S3", "Stripe", "Twilio", "SendGrid", "Python", "SQL", "REST APIs", "Claude", "OpenAI"]
+  },
+  "interests": {
+    "label": "Interests",
+    "heading": "Life outside of work",
+    "paragraphsHtml": [
+      "When I'm not building software, you'll usually find me moving. I'm a regular at the gym, have run several marathons, and am working toward an IRONMAN. Skiing is a genuine passion — I've skied across the US and internationally, and have an ambition to ski on all seven continents. I'm also a big Formula 1 fan and try to catch as many races in person as I can.",
+      "I'm also a frequent traveler with a growing list of destinations. I live in <strong style=\"color: var(--text);\">Phoenix, AZ</strong> with my 2 beautiful huskies, and spend a lot of time on Hacker News when I'm not outdoors."
+    ],
+    "bucketListTitle": "Bucket list",
+    "bucketList": [
+      { "text": "Join a safari in Tanzania", "done": true },
+      { "text": "Sub-3-hour marathon" },
+      { "text": "Complete an IRONMAN triathlon" },
+      { "text": "Ski all seven continents" },
+      { "text": "Get SCUBA certified" },
+      { "text": "Solo parachute jump" },
+      { "text": "Visit all 50 US states (Missing: North Dakota)" },
+      { "text": "Attend 24 F1 races (Attended: Montreal, Austin, Zandvoort, Monza)" }
+    ]
+  },
+  "footer": {
+    "copyright": "© 2026 James Hawkins — Software Engineer & Technical Founder, Phoenix, AZ"
+  }
+}

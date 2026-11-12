@@ -2,19 +2,22 @@
 // Builds templates/<slug>/index.html for every entry in scripts/variants.mjs,
 // plus the gallery at templates/index.html.
 //
-// Each variant reuses the <body> of the root index.html verbatim (so the copy
-// can't drift) and swaps only the <head>: the live page's inline <style> is
-// replaced by templates/_shared/base.css + templates/<slug>/style.css.
-// Analytics and JSON-LD are dropped, and pages are marked noindex with the
-// live page as canonical.
+// Each variant's <body> is renderBody(content/profile.json) — the same markup
+// as the live index.html, with image paths rebased to ../../img/ — so every
+// theme shares identical markup and differs only in its stylesheet (a future
+// style switcher on the homepage can just swap CSS). The <head> inlines
+// templates/_shared/base.css + templates/<slug>/style.css. Analytics and
+// JSON-LD are omitted, and pages are marked noindex with the live page as
+// canonical.
 //
 // Usage: node scripts/build-variants.mjs
-// Copy edits belong in index.html; rerun this afterwards.
+// Copy edits belong in content/profile.json; rerun this (and build-site.mjs).
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { variants } from './variants.mjs';
+import { loadContent, renderBody, pageMeta } from './render-content.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const templatesDir = join(root, 'templates');
@@ -22,20 +25,9 @@ const read = (p) => readFileSync(join(root, p), 'utf8');
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-export function extractBody(html) {
-  const m = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-  if (!m) throw new Error('index.html has no <body>');
-  let body = m[1];
-  // Drop the GA4 tag: its comment, the loader and the inline config script.
-  body = body
-    .replace(/[ \t]*<!--\s*Google tag[\s\S]*?-->\s*/i, '')
-    .replace(/[ \t]*<script[^>]*googletagmanager\.com[^>]*><\/script>\s*/gi, '')
-    .replace(/[ \t]*<script>(?:(?!<\/script>)[\s\S])*gtag\((?:(?!<\/script>)[\s\S])*<\/script>\s*/gi, '');
-  if (/gtag|googletagmanager/i.test(body)) throw new Error('Failed to strip the GA4 tag from the body');
-  // Variants live two levels down; assets stay shared in the root img/.
-  body = body.replace(/(\s(?:src|href)=")(?:\/)?img\//g, '$1../../img/');
-  if (/\s(?:src|href)="\/(?!\/)/.test(body)) throw new Error('Root-absolute path left in body; it would break on file://');
-  return body;
+/** The variant body: shared markup with image paths rebased for templates/<slug>/. */
+export function variantBody(content = loadContent()) {
+  return renderBody(content, { assetPrefix: '../../' });
 }
 
 function splitImports(css) {
@@ -132,7 +124,7 @@ function galleryPage() {
 <body>
   <header>
     <h1>Portfolio design variants</h1>
-    <p>${variants.length} restyles of <a href="../index.html">index.html</a>, each after one design system from feimacode/open-design-agent-kit. Copy is identical in all of them; only layout and styling differ. Previews need an internet connection for web fonts.</p>
+    <p>${variants.length} restyles of <a href="../index.html">index.html</a>, all rendered from content/profile.json, each after one design system from feimacode/open-design-agent-kit. Markup and copy are identical in all of them; only layout and styling differ. Previews need an internet connection for web fonts.</p>
   </header>
   <ul>
 ${cards}
@@ -150,9 +142,9 @@ ${cards}
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
 if (isMain) {
-  const html = read('index.html');
-  const body = extractBody(html);
-  const description = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
+  const content = loadContent();
+  const body = variantBody(content);
+  const description = esc(pageMeta(content).description);
   const only = process.argv.slice(2);
   for (const v of variants) {
     if (only.length && !only.includes(v.slug)) continue;
