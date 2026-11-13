@@ -1,0 +1,37 @@
+/* Shared by every variant (inlined before the variant's own style.css).
+   Structure only — no colours, type or layout opinions beyond the original's
+   behaviour that every variant must keep. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.exp-logo { height: 32px; width: auto; object-fit: contain; flex-shrink: 0; }
+.meta-value, .exp-company, footer p { overflow-wrap: anywhere; }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+.nav-links { list-style: none; }
+.exp-bullets, .bucket-list { list-style: none; }
+
+/* Entrance motion, as on the live page: content paints immediately. */
+.fade-in { transform: translateY(16px); animation: fadeIn 0.6s ease forwards; }
+@keyframes fadeIn { to { transform: translateY(0); } }
+.fade-in:nth-child(1) { animation-delay: 0.05s; }
+.fade-in:nth-child(2) { animation-delay: 0.15s; }
+.fade-in:nth-child(3) { animation-delay: 0.25s; }
+.fade-in:nth-child(4) { animation-delay: 0.35s; }
+.fade-in:nth-child(5) { animation-delay: 0.45s; }
+
+@media (max-width: 700px) {
+  /* Hide section anchors on phones but keep the Contact CTA reachable */
+  .nav-links li:not(:last-child) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .fade-in { transform: none !important; animation: none !important; }
+}
