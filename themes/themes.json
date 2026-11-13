@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "apple",
+    "name": "Apple",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "stripe",
+    "name": "Stripe",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "claude",
+    "name": "Claude",
+    "mode": "light",
+    "themeColor": "#f5f4ed"
+  },
+  {
+    "slug": "notion",
+    "name": "Notion",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "vercel",
+    "name": "Vercel",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "airbnb",
+    "name": "Airbnb",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "github",
+    "name": "GitHub",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "discord",
+    "name": "Discord",
+    "mode": "dark",
+    "themeColor": "#313338"
+  },
+  {
+    "slug": "figma",
+    "name": "Figma",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "slack",
+    "name": "Slack",
+    "mode": "light",
+    "themeColor": "#4a154b"
+  },
+  {
+    "slug": "spotify",
+    "name": "Spotify",
+    "mode": "dark",
+    "themeColor": "#121212"
+  },
+  {
+    "slug": "coinbase",
+    "name": "Coinbase",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "monzo",
+    "name": "Monzo",
+    "mode": "light",
+    "themeColor": "#f6f7f9"
+  },
+  {
+    "slug": "nvidia",
+    "name": "NVIDIA",
+    "mode": "dark",
+    "themeColor": "#000000"
+  },
+  {
+    "slug": "cohere",
+    "name": "Cohere",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "mistral",
+    "name": "Mistral AI",
+    "mode": "light",
+    "themeColor": "#fffaeb"
+  },
+  {
+    "slug": "perplexity",
+    "name": "Perplexity",
+    "mode": "dark",
+    "themeColor": "#0f0f10"
+  },
+  {
+    "slug": "huggingface",
+    "name": "Hugging Face",
+    "mode": "light",
+    "themeColor": "#fafafa"
+  },
+  {
+    "slug": "wired",
+    "name": "WIRED (editorial)",
+    "mode": "light",
+    "themeColor": "#ffffff"
+  },
+  {
+    "slug": "neobrutalism",
+    "name": "Neobrutalism (bold)",
+    "mode": "light",
+    "themeColor": "#fff4cf"
+  }
+]

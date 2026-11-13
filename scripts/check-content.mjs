@@ -20,7 +20,7 @@ export function checkContent() {
     return v;
   };
   const nonEmpty = (v) => Array.isArray(v) && v.length > 0;
-  ['site.url', 'site.analyticsId', 'site.websiteDescription', 'person.name', 'person.jobTitle', 'person.summary', 'person.schemaDescription', 'person.email', 'person.location.label', 'person.image.src', 'person.image.alt', 'nav.logo', 'nav.cta', 'hero.firstName', 'hero.lastName', 'hero.photo.src', 'hero.badge', 'hero.taglineHtml', 'hero.primaryCta', 'experience.heading', 'education.heading', 'skills.heading', 'interests.heading', 'interests.bucketListTitle', 'footer.copyright'].forEach((p) => need(p));
+  ['site.url', 'site.analyticsId', 'site.websiteDescription', 'site.themeLabel', 'site.themeDefaultName', 'person.name', 'person.jobTitle', 'person.summary', 'person.schemaDescription', 'person.email', 'person.location.label', 'person.image.src', 'person.image.alt', 'nav.logo', 'nav.cta', 'hero.firstName', 'hero.lastName', 'hero.photo.src', 'hero.badge', 'hero.taglineHtml', 'hero.primaryCta', 'experience.heading', 'education.heading', 'skills.heading', 'interests.heading', 'interests.bucketListTitle', 'footer.copyright'].forEach((p) => need(p));
   ['person.social', 'nav.links', 'hero.meta', 'experience.items', 'education.items', 'skills.items', 'interests.paragraphsHtml', 'interests.bucketList'].forEach((p) => need(p, nonEmpty));
 
   (c.experience?.items || []).forEach((e, i) => {

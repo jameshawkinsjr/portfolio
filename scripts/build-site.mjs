@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 // Generates the live index.html from content/profile.json + site/live.css +
-// site/scroll-anim.js. The CSS and scripts stay inline (the page is tuned for
-// LCP), and GA4, JSON-LD, canonical and Open Graph tags are kept.
+// site/scroll-anim.js + the theme switcher (site/theme-head.js and
+// site/theme-switcher.js, over the themes in scripts/variants.mjs). The CSS
+// and scripts stay inline (the page is tuned for LCP), and GA4, JSON-LD,
+// canonical and Open Graph tags are kept. Visitors on the default theme load
+// nothing extra; other themes load themes/<slug>.css.
 //
 // Usage: node scripts/build-site.mjs          write index.html
 //        node scripts/build-site.mjs --check  exit 1 if index.html is stale
@@ -12,12 +15,28 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { root, loadContent, renderMeta, renderJsonLd, renderBody, esc } from './render-content.mjs';
+import { variants } from './variants.mjs';
+
+const DEFAULT_THEME_COLOR = '#080808';
+
+/** Theme switcher config shared by site/theme-head.js and site/theme-switcher.js. */
+export function themeConfig(c) {
+  return {
+    label: c.site.themeLabel,
+    defaultName: c.site.themeDefaultName,
+    defaultColor: DEFAULT_THEME_COLOR,
+    themes: variants.map((v) => ({ slug: v.slug, name: v.name, color: v.theme, ...(v.switcherPos ? { pos: v.switcherPos } : {}) })),
+  };
+}
 
 const indent = (text, pad) => text.replace(/\n+$/, '').split('\n').map((l) => (l ? pad + l : l)).join('\n');
 
 export function renderSite(c = loadContent()) {
   const css = readFileSync(join(root, 'site', 'live.css'), 'utf8');
   const js = readFileSync(join(root, 'site', 'scroll-anim.js'), 'utf8');
+  const themeHead = readFileSync(join(root, 'site', 'theme-head.js'), 'utf8');
+  const themeUi = readFileSync(join(root, 'site', 'theme-switcher.js'), 'utf8');
+  const cfg = JSON.stringify(themeConfig(c)).replace(/</g, '\\u003c');
   const ga = esc(c.site.analyticsId);
   const fonts = 'https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&amp;family=JetBrains+Mono&amp;display=swap';
   return `<!DOCTYPE html>
@@ -32,7 +51,7 @@ ${renderMeta(c)}
   <!-- Icons & UI -->
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <meta name="theme-color" content="#080808" />
+  <meta name="theme-color" content="${DEFAULT_THEME_COLOR}" />
 
   <!-- Fonts (pruned to weights actually used; non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,14 +62,24 @@ ${renderMeta(c)}
   <!-- Structured data -->
 ${renderJsonLd(c)}
 
-  <style>
+  <style id="live-css">
 ${indent(css, '    ')}
   </style>
+
+  <!-- Theme switcher: apply a chosen theme (themes/<slug>.css) before first paint -->
+  <script>
+    window.JH_THEMES = ${cfg};
+${indent(themeHead, '    ')}
+  </script>
 </head>
 <body>
 ${renderBody(c)}
   <script>
 ${indent(js, '    ')}
+  </script>
+
+  <script>
+${indent(themeUi, '    ')}
   </script>
 
   <!-- Google tag (gtag.js) - GA4 -->

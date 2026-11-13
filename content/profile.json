@@ -2,7 +2,9 @@
   "site": {
     "url": "https://jameshawkins.com/",
     "analyticsId": "G-09HHJW4C1K",
-    "websiteDescription": "Portfolio of James Hawkins, software engineer and technical founder in Phoenix, AZ."
+    "websiteDescription": "Portfolio of James Hawkins, software engineer and technical founder in Phoenix, AZ.",
+    "themeLabel": "Theme",
+    "themeDefaultName": "Current (dark)"
   },
   "person": {
     "name": "James Hawkins",
