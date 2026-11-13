@@ -49,8 +49,8 @@ export function renderSite(c = loadContent()) {
 ${renderMeta(c)}
 
   <!-- Icons & UI -->
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" href="favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <meta name="theme-color" content="${DEFAULT_THEME_COLOR}" />
 
   <!-- Fonts (pruned to weights actually used; non-blocking) -->

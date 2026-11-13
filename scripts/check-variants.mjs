@@ -120,7 +120,9 @@ async function browserChecks() {
     for (const v of selected) {
       for (const width of [1280, 390]) await checkPage(cdp, v, width, shots);
     }
-    console.log(`browser: checked ${selected.length} variants at 1280px and 390px; screenshots in templates/_screenshots/`);
+    console.log(`browser: checked ${selected.length} variants at 1280px and 390px`);
+    await homepageChecks(cdp, shots);
+    console.log(`browser: checked the homepage with the default and ${selected.length} themes at 1280px and 390px, and the Theme dropdown; screenshots in templates/_screenshots/`);
   } finally {
     cdp.close();
     proc.kill();
@@ -154,48 +156,216 @@ async function connect(url) {
   };
 }
 
-async function checkPage(cdp, v, width, shots) {
-  const tag = `${v.slug}@${width}`;
+// Opens a fresh tab and collects console errors and requested URLs.
+async function openTab(cdp, { width = 1280, reducedMotion = true } = {}) {
   const { targetId } = await cdp.send('Target.createTarget', { url: 'about:blank' });
   const { sessionId } = await cdp.send('Target.attachToTarget', { targetId, flatten: true });
   const send = (m, p) => cdp.send(m, p, sessionId);
-  const errors = [];
-  let loaded;
-  const loadedP = new Promise((r) => (loaded = r));
+  const tab = { send, errors: [], requests: [] };
+  let loaded = () => {};
   const off = cdp.on((msg) => {
     if (msg.sessionId !== sessionId) return;
-    if (msg.method === 'Runtime.exceptionThrown') errors.push(msg.params.exceptionDetails.exception?.description || msg.params.exceptionDetails.text);
-    if (msg.method === 'Runtime.consoleAPICalled' && msg.params.type === 'error') errors.push(msg.params.args.map((a) => a.value ?? a.description).join(' '));
-    if (msg.method === 'Log.entryAdded' && msg.params.entry.level === 'error') errors.push(`${msg.params.entry.text} ${msg.params.entry.url || ''}`.trim());
+    if (msg.method === 'Runtime.exceptionThrown') tab.errors.push(msg.params.exceptionDetails.exception?.description || msg.params.exceptionDetails.text);
+    if (msg.method === 'Runtime.consoleAPICalled' && msg.params.type === 'error') tab.errors.push(msg.params.args.map((a) => a.value ?? a.description).join(' '));
+    if (msg.method === 'Log.entryAdded' && msg.params.entry.level === 'error') tab.errors.push(`${msg.params.entry.text} ${msg.params.entry.url || ''}`.trim());
+    if (msg.method === 'Network.requestWillBeSent') tab.requests.push(msg.params.request.url);
     if (msg.method === 'Page.loadEventFired') loaded();
   });
-  try {
-    await send('Page.enable');
-    await send('Runtime.enable');
-    await send('Log.enable');
-    await send('Emulation.setDeviceMetricsOverride', { width, height: width > 500 ? 900 : 844, deviceScaleFactor: 1, mobile: width <= 500 });
-    await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
-    const url = pathToFileURL(join(root, 'templates', v.slug, 'index.html')).href;
+  await send('Page.enable');
+  await send('Runtime.enable');
+  await send('Log.enable');
+  await send('Network.enable');
+  await send('Emulation.setDeviceMetricsOverride', { width, height: width > 500 ? 900 : 844, deviceScaleFactor: 1, mobile: width <= 500 });
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: reducedMotion ? 'reduce' : 'no-preference' }] });
+  tab.goto = async (url) => {
+    tab.errors.length = 0;
+    tab.requests.length = 0;
+    const p = new Promise((r) => (loaded = r));
     await send('Page.navigate', { url });
-    await Promise.race([loadedP, new Promise((r) => setTimeout(r, 15000))]);
-    const { result } = await send('Runtime.evaluate', { expression: `(${pageAudit})()`, awaitPromise: true, returnByValue: true });
-    const r = result.value;
+    await Promise.race([p, new Promise((r) => setTimeout(r, 15000))]);
+  };
+  tab.eval = async (fnOrExpr, ...args) => {
+    const expression = typeof fnOrExpr === 'function' ? `(${fnOrExpr})(...${JSON.stringify(args)})` : fnOrExpr;
+    const { result, exceptionDetails } = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
+    if (exceptionDetails) throw new Error(exceptionDetails.exception?.description || exceptionDetails.text);
+    return result.value;
+  };
+  tab.waitFor = async (fn, ms = 10000, ...args) => {
+    const end = Date.now() + ms;
+    while (Date.now() < end) {
+      if (await tab.eval(fn, ...args)) return true;
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    return false;
+  };
+  tab.audit = async (tag, { contrast = true } = {}) => {
+    const r = await tab.eval(pageAudit);
     if (!r) throw new Error('audit returned nothing');
     if (r.overflow > 0) fail(tag, `horizontal overflow of ${r.overflow}px (widest: ${r.widest.join(', ')})`);
     for (const img of r.brokenImages) fail(tag, `broken image ${img}`);
     for (const f of r.failedFonts) fail(tag, `web font failed to load: ${f}`);
     for (const p of r.pseudoText) fail(tag, `pseudo-element adds text: ${p}`);
-    for (const c of r.contrast) fail(tag, `low contrast ${c}`);
-    for (const e of errors) fail(tag, `console: ${e}`);
-    const metrics = await send('Page.getLayoutMetrics');
-    const h = Math.ceil(metrics.cssContentSize.height);
-    const shot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width, height: h, scale: 1 } });
-    writeFileSync(join(shots, `${v.slug}-${width}.png`), Buffer.from(shot.data, 'base64'));
+    if (contrast) for (const c of r.contrast) fail(tag, `low contrast ${c}`);
+    for (const e of tab.errors) fail(tag, `console: ${e}`);
+  };
+  tab.shoot = async (file, fullPage = true) => {
+    let clip;
+    if (fullPage) {
+      const metrics = await send('Page.getLayoutMetrics');
+      clip = { x: 0, y: 0, width, height: Math.ceil(metrics.cssContentSize.height), scale: 1 };
+    }
+    const shot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: fullPage, ...(clip ? { clip } : {}) });
+    writeFileSync(file, Buffer.from(shot.data, 'base64'));
+  };
+  tab.close = async () => { off(); await cdp.send('Target.closeTarget', { targetId }).catch(() => {}); };
+  return tab;
+}
+
+async function checkPage(cdp, v, width, shots) {
+  const tag = `${v.slug}@${width}`;
+  const tab = await openTab(cdp, { width });
+  try {
+    await tab.goto(pathToFileURL(join(root, 'templates', v.slug, 'index.html')).href);
+    await tab.audit(tag);
+    await tab.shoot(join(shots, `${v.slug}-${width}.png`));
   } catch (e) {
     fail(tag, `browser check crashed: ${e.message}`);
   } finally {
-    off();
-    await cdp.send('Target.closeTarget', { targetId }).catch(() => {});
+    await tab.close();
+  }
+}
+
+function homeUrl(query = '') { return pathToFileURL(join(root, 'index.html')).href + query; }
+
+// Page-side: which theme is applied, judged from the DOM rather than the switcher's own state.
+function themeState() {
+  const links = [...document.querySelectorAll('link[data-theme-css]')];
+  let stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+  const sw = document.querySelector('theme-switcher');
+  return {
+    theme: document.documentElement.getAttribute('data-theme'),
+    liveMedia: document.getElementById('live-css').media,
+    links: links.map((l) => l.getAttribute('href')),
+    loaded: links.every((l) => l.sheet && l.sheet.cssRules.length > 0),
+    stored,
+    search: location.search,
+    select: sw && sw.shadowRoot ? sw.shadowRoot.querySelector('select').value : null,
+    color: document.querySelector('meta[name="theme-color"]').content,
+  };
+}
+
+// Page-side: links and buttons hidden under the switcher (at the current scroll position).
+function switcherOverlaps() {
+  const sw = document.querySelector('theme-switcher');
+  if (!sw) return ['no <theme-switcher> on the page'];
+  const s = sw.getBoundingClientRect();
+  if (!s.width || !s.height) return ['switcher has no size'];
+  if (s.right > innerWidth || s.left < 0 || s.top < 0 || s.bottom > innerHeight) return ['switcher is off screen'];
+  const hits = [];
+  for (const el of document.querySelectorAll('a, button, select, input, [role="button"]')) {
+    const r = el.getBoundingClientRect();
+    const cs = getComputedStyle(el);
+    if (!r.width || !r.height || cs.visibility === 'hidden') continue;
+    if (r.left < s.right && r.right > s.left && r.top < s.bottom && r.bottom > s.top) hits.push(`${el.tagName.toLowerCase()} "${el.textContent.trim().slice(0, 30)}"`);
+  }
+  return hits;
+}
+
+function chooseTheme(slug) {
+  const sel = document.querySelector('theme-switcher').shadowRoot.querySelector('select');
+  sel.value = slug;
+  sel.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+// Homepage: every theme via ?theme=, plus the dropdown's behaviour.
+async function homepageChecks(cdp, shots) {
+  const themes = [{ slug: '', name: 'default' }, ...selected];
+  for (const width of [1280, 390]) {
+    const tab = await openTab(cdp, { width });
+    try {
+      await tab.goto(homeUrl());
+      await tab.eval(() => localStorage.clear());
+      for (const v of themes) {
+        const tag = `home${v.slug ? '?theme=' + v.slug : ''}@${width}`;
+        await tab.goto(homeUrl(v.slug ? `?theme=${v.slug}` : ''));
+        const st = await tab.eval(themeState);
+        if (v.slug) {
+          if (st.theme !== v.slug || st.liveMedia !== 'not all' || st.links.length !== 1 || st.links[0] !== `themes/${v.slug}.css` || !st.loaded) fail(tag, `theme not applied: ${JSON.stringify(st)}`);
+        } else if (st.theme || st.liveMedia || st.links.length || tab.requests.some((u) => u.includes('/themes/'))) fail(tag, `default page loaded theme assets: ${JSON.stringify(st)}`);
+        if (st.select !== v.slug) fail(tag, `dropdown shows "${st.select}" instead of "${v.slug}"`);
+        // The default dark page predates this work; its contrast is out of scope here.
+        await tab.audit(tag, { contrast: !!v.slug });
+        for (const h of await tab.eval(switcherOverlaps)) fail(tag, `Theme dropdown covers ${h}`);
+        await tab.shoot(join(shots, `home-${v.slug || 'default'}-${width}.png`), false);
+      }
+    } catch (e) {
+      fail(`home@${width}`, `browser check crashed: ${e.message}`);
+    } finally {
+      await tab.close();
+    }
+  }
+
+  // Behaviour, with motion enabled so the scroll animation runs too.
+  const tab = await openTab(cdp, { width: 1280, reducedMotion: false });
+  const tag = 'home dropdown';
+  const settled = (slug) => tab.waitFor((s) => {
+    const t = document.documentElement.getAttribute('data-theme') || '';
+    const links = document.querySelectorAll('link[data-theme-css]');
+    return t === s && (s ? links.length === 1 && links[0].sheet : links.length === 0);
+  }, 10000, slug);
+  try {
+    await tab.goto(homeUrl());
+    await tab.eval(() => localStorage.clear());
+
+    for (const bad of ['../x', '..%2Fx', '__proto__', 'constructor', 'unknown', 'stripe.css', 'https://example.com/x', '']) {
+      await tab.goto(homeUrl(`?theme=${encodeURIComponent(bad)}`));
+      const st = await tab.eval(themeState);
+      const fetched = tab.requests.filter((u) => !u.startsWith(homeUrl())).filter((u) => u.includes('/themes/') || u.includes('example.com') || /\/x(\.css)?$/.test(u));
+      if (st.theme || st.liveMedia || st.links.length || fetched.length) fail(tag, `?theme=${bad} should fall back to the default: ${JSON.stringify({ ...st, fetched })}`);
+    }
+
+    await tab.goto(homeUrl());
+    await tab.eval(chooseTheme, 'stripe');
+    if (!(await settled('stripe'))) fail(tag, 'choosing Stripe did not apply it');
+    let st = await tab.eval(themeState);
+    if (st.liveMedia !== 'not all' || st.links[0] !== 'themes/stripe.css' || st.stored !== 'stripe' || st.search !== '?theme=stripe' || st.color !== '#ffffff') fail(tag, `after choosing Stripe: ${JSON.stringify(st)}`);
+
+    await tab.goto(homeUrl());
+    st = await tab.eval(themeState);
+    if (st.theme !== 'stripe' || st.select !== 'stripe' || st.links[0] !== 'themes/stripe.css') fail(tag, `Stripe not restored on reload: ${JSON.stringify(st)}`);
+
+    await tab.eval(chooseTheme, 'wired');
+    await tab.eval(chooseTheme, 'monzo');
+    if (!(await settled('monzo'))) fail(tag, 'switching twice in a row did not end on Monzo');
+    await new Promise((r) => setTimeout(r, 800));
+    st = await tab.eval(themeState);
+    if (st.links.length !== 1 || st.links[0] !== 'themes/monzo.css' || st.stored !== 'monzo') fail(tag, `after switching twice: ${JSON.stringify(st)}`);
+
+    // Switch while scrolled: nothing the scroll animation hid may stay invisible.
+    for (const slug of ['discord', 'github', '']) {
+      await tab.eval(() => document.getElementById('skills').scrollIntoView());
+      await new Promise((r) => setTimeout(r, 300));
+      await tab.eval(chooseTheme, slug);
+      if (!(await settled(slug))) fail(tag, `switching to ${slug || 'default'} while scrolled did not apply`);
+      await new Promise((r) => setTimeout(r, 2500));
+      const hidden = await tab.eval(() => [...document.querySelectorAll('.exp-item, .edu-item, .skill-pill')]
+        .filter((el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0 && +getComputedStyle(el).opacity < 0.99; })
+        .map((el) => el.className));
+      if (hidden.length) fail(tag, `after switching to ${slug || 'default'} while scrolled, still invisible: ${hidden.slice(0, 3).join(', ')}`);
+      for (const h of await tab.eval(switcherOverlaps)) fail(tag, `(${slug || 'default'}, scrolled) Theme dropdown covers ${h}`);
+    }
+
+    st = await tab.eval(themeState);
+    if (st.theme || st.liveMedia || st.links.length || st.stored !== null || st.search.includes('theme=') || st.color !== '#080808') fail(tag, `after switching back to the default: ${JSON.stringify(st)}`);
+    await tab.goto(homeUrl());
+    st = await tab.eval(themeState);
+    if (st.theme || st.links.length) fail(tag, `default not kept after reload: ${JSON.stringify(st)}`);
+    for (const e of tab.errors) fail(tag, `console: ${e}`);
+  } catch (e) {
+    fail(tag, `browser check crashed: ${e.message}`);
+  } finally {
+    await tab.close();
   }
 }
 
