@@ -6,9 +6,14 @@ Twenty restyles of the portfolio, each after one design system from
 or any `templates/<slug>/index.html` directly from disk (`file://` works; web fonts
 need an internet connection, otherwise system fonts are used).
 
-These are previews for choosing a new look. They are not linked from the site,
-not in `sitemap.xml`, and every page has `noindex, nofollow`. Their canonical
-URL is the live home page.
+The same 20 themes are also selectable on the **live homepage**: a "Theme" dropdown at
+the top right swaps the stylesheet in place, so visitors stay on `/`. The choice is saved
+in `localStorage`, and `?theme=<slug>` links share one (e.g. `/?theme=wired`). Visitors who
+never touch it get today's dark page with nothing extra loaded.
+
+The pages under `templates/` are previews and a dev aid. They are not linked from the site,
+not in `sitemap.xml`, and every page has `noindex, nofollow`. Their canonical URL is the
+live home page.
 
 ## How they're made
 
@@ -20,6 +25,7 @@ Everything else is generated from it:
 | `index.html` (the live page) | `scripts/build-site.mjs` | `content/profile.json` + `site/live.css` + `site/scroll-anim.js` |
 | `templates/<slug>/index.html` | `scripts/build-variants.mjs` | `content/profile.json` + `templates/_shared/base.css` + `templates/<slug>/style.css` |
 | `templates/index.html` (gallery) | `scripts/build-variants.mjs` | `scripts/variants.mjs` |
+| `themes/<slug>.css`, `themes/themes.json` | `scripts/build-variants.mjs` | font `@import`s + `templates/_shared/base.css` + `templates/<slug>/style.css`; manifest from `scripts/variants.mjs` |
 
 Don't edit generated files by hand; the next build overwrites them. Each one says so
 in a comment at the top of its `<head>`.
@@ -36,12 +42,32 @@ in a comment at the top of its `<head>`.
 - Variants drop analytics and JSON-LD; the live page keeps GA4, JSON-LD, Open Graph and
   its inline CSS.
 
+### The homepage Theme dropdown
+
+- `scripts/build-site.mjs` inlines two scripts into `index.html`, with the theme list
+  from `scripts/variants.mjs` and the labels from `content/profile.json`
+  (`site.themeLabel`, `site.themeDefaultName`):
+  - `site/theme-head.js` runs in `<head>`. If `?theme=` (or the saved choice) names a known
+    slug, it disables the inline live stylesheet (`<style id="live-css">`) and writes a
+    render-blocking `<link href="themes/<slug>.css">`, so there's no flash of the dark
+    page. Only slugs from the allowlist ever reach a URL; anything else means the default.
+  - `site/theme-switcher.js` adds the `<theme-switcher>` element (a `<select>` in a Shadow
+    DOM, so no theme can restyle it). It loads the new sheet before dropping the old one,
+    saves the choice (`localStorage` key `theme`), updates `?theme=` and `<meta name="theme-color">`,
+    and sits just under the nav bar (re-measured on scroll, resize and theme change).
+    Add `switcherPos: 'bottom'` to a variant in `scripts/variants.mjs` if a theme ever
+    needs it out of the way.
+- Paths are relative (`themes/…`), so it also works when `index.html` is opened from disk.
+- `themes/` must stay a plain folder: GitHub Pages' Jekyll build skips `_underscore` paths.
+
 ### Rule: one markup, many stylesheets
 
 A variant may only change CSS. Never add markup, classes or text for one theme. That
-keeps every theme interchangeable, so a style switcher on the homepage can later just
-swap stylesheets over the same HTML. Themes restyle the existing classes and override
-inline styles with selectors such as `footer[style] { … !important }`.
+keeps every theme interchangeable, which the homepage dropdown relies on: it swaps
+stylesheets over the same HTML. Themes restyle the existing classes and override inline
+styles with selectors such as `footer[style] { … !important }`. A theme must also work on
+its own (the preview pages have no switcher) and must not style or depend on
+`<theme-switcher>`.
 
 ## Editing copy
 
@@ -54,7 +80,12 @@ node scripts/check-variants.mjs          # or --static to skip the browser check
 `node scripts/check-content.mjs` checks the content on its own: required fields, that every
 image exists, and that retired names such as "Just Appraised" don't reappear.
 
-`check-variants.mjs` runs that content check too. It fails if `index.html` is out of date
+`check-variants.mjs` runs that content check too. It also loads the homepage with the
+default and every `?theme=` at both widths (same checks as below, plus "the dropdown
+covers no link or button"; contrast is skipped for the original dark page). It drives
+the dropdown: choose a theme, reload, switch twice in a row, switch while scrolled (no
+section stays hidden by the scroll animation), go back to the default. It also checks
+that invalid `?theme=` values fall back without requesting anything. It fails if `index.html` is out of date
 with `content/` or `site/`. It also fails if any variant's body differs from the shared
 markup, or its visible text differs from the live page. It catches missing noindex or
 canonical tags and any analytics that slipped in. At 1280px and 390px it fails on content
@@ -65,15 +96,17 @@ via CSS `content`, or AA contrast failures on solid backgrounds. It needs Google
 
 To restyle the live page itself, edit `site/live.css` and run `build-site.mjs`.
 
-## Shipping one
+## Shipping
 
-To make a variant the live design, replace `site/live.css` with that variant's
+Merging to `master` publishes the dropdown, `themes/`, `templates/`, `content/`, `scripts/`
+and `site/` on GitHub Pages; there is no build step on Pages, so commit regenerated output.
+GitHub Pages caches assets for about 10 minutes, so a just-deployed theme can be briefly stale.
+
+To make one theme the new default instead, replace `site/live.css` with that theme's
 `templates/_shared/base.css` + `templates/<slug>/style.css` (moving its `@import` font URLs
-into the font `<link>` in `scripts/build-site.mjs`), then run `node scripts/build-site.mjs`.
-Decide whether `templates/` should be deployed at all. Merging this folder to `master`
-publishes it on GitHub Pages, as noindex pages.
+into the font `<link>` in `scripts/build-site.mjs`) and run `node scripts/build-site.mjs`.
 
-Revisit fonts and brand cues before shipping. The variants borrow the visual language of
+Revisit fonts and brand cues before shipping. The themes borrow the visual language of
 real companies, and many use Google Fonts stand-ins for proprietary typefaces.
 
 ## Credits

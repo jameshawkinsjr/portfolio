@@ -5,7 +5,7 @@ design variant in `templates/` are generated from it, so **edit copy here, then 
 
 ```sh
 node scripts/build-site.mjs       # regenerates index.html
-node scripts/build-variants.mjs   # regenerates templates/*/index.html + gallery
+node scripts/build-variants.mjs   # regenerates templates/*/index.html, gallery, themes/*.css
 node scripts/check-variants.mjs   # verifies everything (add --static to skip Chrome)
 ```
 
@@ -19,6 +19,7 @@ fragments (used for inline `<strong>` emphasis), so escape `&` as `&amp;` in the
 | Key | What it drives |
 |---|---|
 | `site.url`, `site.analyticsId`, `site.websiteDescription` | Canonical/OG URLs, the GA4 tag, the JSON-LD `WebSite` description |
+| `site.themeLabel`, `site.themeDefaultName` | The homepage "Theme" dropdown's label and the name of the default (original) look |
 | `person.name`, `person.jobTitle` | `<title>` (`name — jobTitle \| location`), OG/Twitter titles, JSON-LD |
 | `person.summary` | OG/Twitter description; the meta description is `name — summary` |
 | `person.schemaDescription` | JSON-LD `Person.description` |

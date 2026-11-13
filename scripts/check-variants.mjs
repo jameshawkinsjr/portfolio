@@ -1,14 +1,18 @@
 #!/usr/bin/env node
-// Checks the generated variants in templates/ against index.html.
+// Checks the generated live page, theme stylesheets and variants in templates/.
 //
 // Static checks (always):
 //   - content/profile.json passes scripts/check-content.mjs
-//   - index.html is up to date with content/ and site/ (scripts/build-site.mjs)
+//   - index.html is up to date with content/ and site/ (scripts/build-site.mjs),
+//     and themes/*.css + themes/themes.json with templates/ (build-variants.mjs)
 //   - each variant's <body> equals the shared renderBody() markup (img paths
 //     rebased) and its visible text equals the live index.html's, ignoring <title>
 //   - noindex + canonical present; no gtag / googletagmanager / JSON-LD
 //   - every local src/href resolves to a file on disk (works from file://)
-// Browser checks (skipped with --static; needs Google Chrome, or set CHROME):
+// Browser checks (skipped with --static; needs Google Chrome, or set CHROME).
+//   The homepage is loaded with the default and every ?theme=, and the Theme
+//   dropdown is driven (choose, reload, switch twice, while scrolled, back to
+//   default, invalid values). For every page:
 //   - loads each page over file:// at 1280px and 390px with reduced motion
 //   - horizontal overflow, broken images, console errors / failed requests,
 //     web fonts that failed to load, letters injected via ::before/::after,
@@ -24,7 +28,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { variants } from './variants.mjs';
-import { variantBody } from './build-variants.mjs';
+import { variantBody, themeCss, themeManifest } from './build-variants.mjs';
 import { renderSite } from './build-site.mjs';
 import { checkContent } from './check-content.mjs';
 
@@ -82,6 +86,12 @@ for (const v of selected) {
     if (!existsSync(target)) fail(v.slug, `missing local file ${url}`);
   }
 }
+for (const v of selected) {
+  const f = join(root, 'themes', `${v.slug}.css`);
+  if (!existsSync(f) || readFileSync(f, 'utf8') !== themeCss(v)) fail(v.slug, `themes/${v.slug}.css is missing or stale — rebuild`);
+}
+const manifest = join(root, 'themes', 'themes.json');
+if (!existsSync(manifest) || readFileSync(manifest, 'utf8') !== themeManifest()) failures.push('themes/themes.json is missing or stale — rebuild');
 const galleryFile = join(root, 'templates', 'index.html');
 if (!existsSync(galleryFile)) failures.push('gallery: templates/index.html not built');
 else {
