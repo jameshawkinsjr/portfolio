@@ -6,8 +6,8 @@ Twenty restyles of the portfolio, each after one design system from
 or any `templates/<slug>/index.html` directly from disk (`file://` works; web fonts
 need an internet connection, otherwise system fonts are used).
 
-The same 20 themes are also selectable on the **live homepage**: a "Theme" dropdown at
-the top right swaps the stylesheet in place, so visitors stay on `/`. The choice is saved
+The same 20 themes are also selectable on the **live homepage**: a "Theme" dropdown in the
+nav bar, between Interests and Contact, swaps the stylesheet in place, so visitors stay on `/`. The choice is saved
 in `localStorage`, and `?theme=<slug>` links share one (e.g. `/?theme=wired`). Visitors who
 never touch it get today's dark page with nothing extra loaded.
 
@@ -51,12 +51,14 @@ in a comment at the top of its `<head>`.
     slug, it disables the inline live stylesheet (`<style id="live-css">`) and writes a
     render-blocking `<link href="themes/<slug>.css">`, so there's no flash of the dark
     page. Only slugs from the allowlist ever reach a URL; anything else means the default.
-  - `site/theme-switcher.js` adds the `<theme-switcher>` element (a `<select>` in a Shadow
-    DOM, so no theme can restyle it). It loads the new sheet before dropping the old one,
-    saves the choice (`localStorage` key `theme`), updates `?theme=` and `<meta name="theme-color">`,
-    and sits just under the nav bar (re-measured on scroll, resize and theme change).
-    Add `switcherPos: 'bottom'` to a variant in `scripts/variants.mjs` if a theme ever
-    needs it out of the way.
+  - `site/theme-switcher.js` adds the `<theme-switcher>` element as a nav item between the
+    last section link and Contact. The `<li>` is inserted by script, so the rendered markup
+    stays identical, and its inline `!important` display keeps it visible on phones, where
+    the section links are hidden. It's a compact "Theme ▾" chip with the native `<select>`
+    laid invisibly over it, in a Shadow DOM so no theme can restyle its insides. It loads the
+    new sheet before dropping the old one, saves the choice (`localStorage` key `theme`),
+    and updates `?theme=` and `<meta name="theme-color">`. The chip is narrow enough
+    (about 70px) for Discord's 72px nav rail; keep it that way.
 - Paths are relative (`themes/…`), so it also works when `index.html` is opened from disk.
 - `themes/` must stay a plain folder: GitHub Pages' Jekyll build skips `_underscore` paths.
 
@@ -83,7 +85,7 @@ image exists, and that retired names such as "Just Appraised" don't reappear.
 `check-variants.mjs` runs that content check too. It also loads the homepage with the
 default and every `?theme=` at both widths (same checks as below, plus "the dropdown
 covers no link or button"; contrast is skipped for the original dark page). It drives
-the dropdown: choose a theme, reload, switch twice in a row, switch while scrolled (no
+the dropdown (which must be the nav item right before Contact): choose a theme, reload, switch twice in a row, switch while scrolled (no
 section stays hidden by the scroll animation), go back to the default. It also checks
 that invalid `?theme=` values fall back without requesting anything. It fails if `index.html` is out of date
 with `content/` or `site/`. It also fails if any variant's body differs from the shared

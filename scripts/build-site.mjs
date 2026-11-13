@@ -25,7 +25,7 @@ export function themeConfig(c) {
     label: c.site.themeLabel,
     defaultName: c.site.themeDefaultName,
     defaultColor: DEFAULT_THEME_COLOR,
-    themes: variants.map((v) => ({ slug: v.slug, name: v.name, color: v.theme, ...(v.switcherPos ? { pos: v.switcherPos } : {}) })),
+    themes: variants.map((v) => ({ slug: v.slug, name: v.name, color: v.theme })),
   };
 }
 

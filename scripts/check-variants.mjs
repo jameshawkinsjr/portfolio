@@ -266,18 +266,21 @@ function themeState() {
 }
 
 // Page-side: links and buttons hidden under the switcher (at the current scroll position).
-function switcherOverlaps() {
+function switcherOverlaps(onScreen = true) {
   const sw = document.querySelector('theme-switcher');
   if (!sw) return ['no <theme-switcher> on the page'];
+  const li = sw.parentElement;
+  const next = li && li.nextElementSibling;
+  if (!li || li.tagName !== 'LI' || !li.parentElement.matches('nav .nav-links') || !next || !next.querySelector('.nav-cta')) return ['switcher is not the nav item right before Contact'];
   const s = sw.getBoundingClientRect();
   if (!s.width || !s.height) return ['switcher has no size'];
-  if (s.right > innerWidth || s.left < 0 || s.top < 0 || s.bottom > innerHeight) return ['switcher is off screen'];
+  if (onScreen && (s.right > innerWidth || s.left < 0 || s.top < 0 || s.bottom > innerHeight)) return ['switcher is off screen'];
   const hits = [];
   for (const el of document.querySelectorAll('a, button, select, input, [role="button"]')) {
     const r = el.getBoundingClientRect();
     const cs = getComputedStyle(el);
     if (!r.width || !r.height || cs.visibility === 'hidden') continue;
-    if (r.left < s.right && r.right > s.left && r.top < s.bottom && r.bottom > s.top) hits.push(`${el.tagName.toLowerCase()} "${el.textContent.trim().slice(0, 30)}"`);
+    if (r.left < s.right && r.right > s.left && r.top < s.bottom && r.bottom > s.top && !sw.contains(el)) hits.push(`${el.tagName.toLowerCase()} "${el.textContent.trim().slice(0, 30)}"`);
   }
   return hits;
 }
@@ -306,7 +309,7 @@ async function homepageChecks(cdp, shots) {
         if (st.select !== v.slug) fail(tag, `dropdown shows "${st.select}" instead of "${v.slug}"`);
         // The default dark page predates this work; its contrast is out of scope here.
         await tab.audit(tag, { contrast: !!v.slug });
-        for (const h of await tab.eval(switcherOverlaps)) fail(tag, `Theme dropdown covers ${h}`);
+        for (const h of await tab.eval(switcherOverlaps)) fail(tag, `Theme dropdown: ${h}`);
         await tab.shoot(join(shots, `home-${v.slug || 'default'}-${width}.png`), false);
       }
     } catch (e) {
@@ -363,7 +366,7 @@ async function homepageChecks(cdp, shots) {
         .filter((el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0 && +getComputedStyle(el).opacity < 0.99; })
         .map((el) => el.className));
       if (hidden.length) fail(tag, `after switching to ${slug || 'default'} while scrolled, still invisible: ${hidden.slice(0, 3).join(', ')}`);
-      for (const h of await tab.eval(switcherOverlaps)) fail(tag, `(${slug || 'default'}, scrolled) Theme dropdown covers ${h}`);
+      for (const h of await tab.eval(switcherOverlaps, false)) fail(tag, `(${slug || 'default'}, scrolled) Theme dropdown covers ${h}`);
     }
 
     st = await tab.eval(themeState);
